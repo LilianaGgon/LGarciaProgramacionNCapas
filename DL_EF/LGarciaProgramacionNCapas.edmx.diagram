@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58bc0a37e660436988979ca665c1fbb4" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Rol" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Usuario" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="LGarciaProgramacionNCapasModel.FK__Usuario__IdRol__619B8048" />
+        <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Colonia" Width="1.5" PointX="9.875" PointY="1.125" />
+        <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Estado" Width="1.5" PointX="5.375" PointY="1.375" />
+        <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Municipio" Width="1.5" PointX="7.625" PointY="1.25" />
+        <AssociationConnector Association="LGarciaProgramacionNCapasModel.FK__Colonia__IdMunic__74AE54BC" />
+        <AssociationConnector Association="LGarciaProgramacionNCapasModel.FK__Municipio__IdEst__71D1E811" />
+        <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Direccion" Width="1.5" PointX="12.125" PointY="1.875" />
+        <AssociationConnector Association="LGarciaProgramacionNCapasModel.FK__Direccion__IdCol__778AC167" />
+        <AssociationConnector Association="LGarciaProgramacionNCapasModel.FK__Direccion__IdUsu__787EE5A0" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
