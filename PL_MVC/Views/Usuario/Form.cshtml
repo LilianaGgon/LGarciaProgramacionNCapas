@@ -16,17 +16,17 @@
         <div class="row align-items-start">
             <div class="col">
                 @Html.LabelFor(model => model.Nombre, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @onkeypress = "ValidacionSoloLetras(event)" })
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control input", @onkeypress = "ValidacionSoloLetras(event)" })
                 <span class="errorSoloLetras"></span>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @onkeypress = "ValidacionSoloLetras(event)" })
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control input", @onkeypress = "ValidacionSoloLetras(event)" })
                 <span class="errorSoloLetras"></span>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @onkeypress = "ValidacionSoloLetras(event)" })
+                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control input", @onkeypress = "ValidacionSoloLetras(event)" })
                 <span class="errorSoloLetras"></span>
             </div>
         </div>
@@ -53,10 +53,10 @@
         <div class="row align-items-center">
             <div class="col">
                 @Html.LabelFor(model => model.Password, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @onblur = "ValidacionPassword(event)", id="password"})
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control input", @onblur = "ValidacionPassword(event)", id = "password" })
                 <span class="errorPassword"></span>
                 @Html.Label("Confirmar Password", new { @class = "form-label" })
-                <input type="text" class="form-control" onblur="ConfirmacionPassword(event)" id="inptConfirmacionPassword" />
+                <input type="text" class="form-control input" onblur="ConfirmacionPassword(event)" id="inptConfirmacionPassword" />
                 <span class="errorCoincidenciaPassword"></span>
             </div>
             <div class="col">
@@ -72,12 +72,10 @@
             </div>
         </div>
 
-
-
         <div class="row align-items-center">
             <div class="col">
                 @Html.LabelFor(model => model.Telefono, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @onkeypress = "ValidacionSoloNumeros(event)" })
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control input", @onkeypress = "ValidacionSoloNumeros(event)" })
                 <span class="errorSoloNumeros"></span>
             </div>
             <div class="col">
@@ -88,7 +86,7 @@
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.CURP, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @onblur = "ValidacionCurp(event)" })
+                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control input", @onblur = "ValidacionCurp(event)" })
                 <span class="errorCurp"></span>
             </div>
         </div>
@@ -122,23 +120,22 @@
             </div>
         </div>
 
-        <hr>
 
         <h2>Dirección</h2>
         <div class="row align-items-center">
             <div class="col">
                 @Html.LabelFor(model => model.Direccion.Calle, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @onkeypress = "ValidacionNumerosLetras(event)" })
+                @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control input", @onkeypress = "ValidacionNumerosLetras(event)" })
                 <span class="errorNumerosLetras"></span>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.Direccion.NumeroInterior, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @onkeypress = "ValidacionNumerosLetras(event)" })
+                @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control input", @onkeypress = "ValidacionNumerosLetras(event)" })
                 <span class="errorNumerosLetras"></span>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.Direccion.NumeroExterior, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @onkeypress = "ValidacionNumerosLetras(event)" })
+                @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control input", @onkeypress = "ValidacionNumerosLetras(event)" })
                 <span class="errorNumerosLetras"></span>
             </div>
         </div>
@@ -193,7 +190,7 @@
 
         <div class="row align-items-center">
             <div class="d-grid col-4 mx-auto">
-                <button type="submit" class="btn btn-outline-primary">enviar</button>
+                <button type="submit" class="btn btn-outline-primary" onclick="ValidacionFormulario()">enviar</button>
             </div>
         </div>
     }
@@ -300,12 +297,14 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 <script>
-    $("#datepicker").datepicker({
-        dateFormat: "yy-mm-dd",
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        changeMonth: true,
-        changeYear: true
+    $(document).ready(function () {
+        $("#datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true
+        });
     });
 </script>
 
@@ -419,11 +418,35 @@
             document.getElementById("inptConfirmacionPassword").style.borderColor = "red"
             $('.errorCoincidenciaPassword').html('Las contraseñas no coinciden');
         } else {
-            document.getElementById("inptConfirmacionPassword").style.borderColor="green"
+            document.getElementById("inptConfirmacionPassword").style.borderColor = "green"
 
         }
     }
 
-    
+    function ValidacionFormulario() {
+        var inputs = document.getElementsByClassName('input')
+
+        inputs.forEach(input => {
+            if (input.val() == '') {
+                $(this).style.borderColor = 'red'
+            }
+        });
+
+        //$('form').on('submit', function (evt) {
+        //    var formValido = true
+
+        //    inputs.forEach(input => {
+        //        if (input.style.borderColor == 'red' || input.val() == '') {
+        //            formValido = false;
+        //        }
+        //    });
+
+        //    if (!formValido) {
+        //        evt.preventDefault();
+        //    }
+        //});
+    }
+
 
 </script>
+
