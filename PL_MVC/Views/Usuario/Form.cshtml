@@ -8,7 +8,7 @@
 <h2>Usuario</h2>
 
 <div class="container">
-    @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { @enctype = "multipart/form-data", id = "form" }))
     {
         @Html.HiddenFor(Model => Model.IdUsuario)
         @Html.HiddenFor(Model => Model.Imagen)
@@ -103,7 +103,7 @@
 
         <div class="row align-items-center">
             <div class="mb-3 col">
-                <input class="form-control" type="file" id="inptFileImgUsuario" name="inptFileImgUsuario" onchange="ValidarImagen(), RemplazarImagen(this)">
+                <input class="form-control" type="file" name="inptFileImgUsuario" id="formFile" onchange="ValidarImagen(), RemplazarImagen(this)">
                 @if (Model.Imagen != null)
                 {
                     <div class="col-6">
@@ -190,13 +190,14 @@
 
         <div class="row align-items-center">
             <div class="d-grid col-4 mx-auto">
-                <button type="submit" class="btn btn-outline-primary" onclick="ValidacionFormulario()">enviar</button>
+                <button type="submit" class="btn btn-outline-primary">enviar</button>
             </div>
         </div>
     }
 </div>
 
 @Scripts.Render("~/bundles/jquery") <!--Importamos JQuery-->
+@Scripts.Render("~/bundles/jqueryui")
 <script>
     function MunicipioGetByIdEstado() { //Nombre de la funcion
         let ddl = $('#ddlEstado').val() //Obtiene el valor del select de la etiqueta con id ddlEstado y lo guarda en una variable let
@@ -293,11 +294,10 @@
 </script>
 
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
-    $(document).ready(function () {
         $("#datepicker").datepicker({
             dateFormat: "yy-mm-dd",
             showOtherMonths: true,
@@ -305,7 +305,6 @@
             changeMonth: true,
             changeYear: true
         });
-    });
 </script>
 
 
@@ -423,29 +422,31 @@
         }
     }
 
-    function ValidacionFormulario() {
-        var inputs = document.getElementsByClassName('input')
+    function validarFormulario(evt) {
+        let isValid = true;
 
-        inputs.forEach(input => {
-            if (input.val() == '') {
-                $(this).style.borderColor = 'red'
+        $("#form input").each(function () {
+            let $input = $(this);
+            let valor = $input.val().trim();
+            let $span = $input.siblings("span");
+
+            if (valor === "") {
+                isValid = false;
+                $input.css("border-color", "red");
+                $span.text("Este campo no puede estar vacío").css("color", "red");
+            } else {
+                $input.css("border-color", "green");
+                $span.text("").css("color", "green");
             }
         });
 
-        //$('form').on('submit', function (evt) {
-        //    var formValido = true
-
-        //    inputs.forEach(input => {
-        //        if (input.style.borderColor == 'red' || input.val() == '') {
-        //            formValido = false;
-        //        }
-        //    });
-
-        //    if (!formValido) {
-        //        evt.preventDefault();
-        //    }
-        //});
+        if (!isValid) {
+            evt.preventDefault();
+        }
     }
+
+    document.getElementById("form").addEventListener("submit", validarFormulario);
+
 
 
 </script>
