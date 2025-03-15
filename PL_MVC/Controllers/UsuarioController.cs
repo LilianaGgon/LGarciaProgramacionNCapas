@@ -1,6 +1,9 @@
-﻿using ML;
+﻿using Microsoft.Owin.Security.Provider;
+using ML;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -113,15 +116,16 @@ namespace PL_MVC.Controllers
             {
                 //Si no encuentra un registro con ese ID, crea uno nuevo 
                 BL.Usuario.AddEF(usuario); //Ejecuta el metodo de agregar de EF
+                ViewBag.MensajeBLUsuario = "Se realizó la inserción correctamente";
             }
             else
             {
                 //Si el registro existe, actualiza los datos
                 ML.Result result = BL.Usuario.UpdateEF(usuario); //Ejecuta el metodo de actualizar de EF 
+                ViewBag.MensajeBLUsuario = "Se realizó la actualización correctamente";
             }
-            return RedirectToAction("GetAll"); //Redirige a la pagina principal
+            return PartialView("_ResultBLUsuario"); //Redirige a la pagina principal
         }
-
 
         // DELETE
         [HttpGet]
@@ -129,8 +133,10 @@ namespace PL_MVC.Controllers
         {
             ML.Usuario usuario = new ML.Usuario();
             ML.Result result = BL.Usuario.DeleteEF(idUsuario.Value);
+            ViewBag.MensajeBLUsuario = "Se eliminó el registro correctamente";
 
-            return RedirectToAction("GetAll");
+
+            return PartialView("_ResultBLUsuario");
         }
 
         //CAMBIAR ESTATUS
@@ -140,7 +146,6 @@ namespace PL_MVC.Controllers
             ML.Result JsonResult = BL.Usuario.CambiarEstatus(idUsuario, estatus); //El modelo result se llama JsonResult y recibe el result del metodo CambiarEstatus del BL
             return Json(JsonResult, JsonRequestBehavior.AllowGet);
         }
-
 
         //DDL ESTADO
         [HttpGet]
@@ -165,5 +170,97 @@ namespace PL_MVC.Controllers
             return data;
         }
 
+        public ActionResult CargaMasivaExcel()
+        {
+            if (Session["RutaExcel"] == null)
+            {
+
+                HttpPostedFileBase excelUsuario = Request.Files["ExcelUsuario"]; //Cachamos el excel del usuario
+
+                string extensionValida = ".xlsx"; //Declaramos la extension permitida
+
+                if (excelUsuario.ContentLength > 0) //Si el contenido del usuario es mayor a 0
+                {
+                    //El usuario si adjuntó un archivo
+                    string extensionArchivoUsuario = Path.GetExtension(excelUsuario.FileName); //Obtenemos la extension del archivo que nos adjunto el usuario
+
+                    if (extensionArchivoUsuario == extensionValida) //Si la extension del archivo adjunto es valida
+                    {
+                        string ruta = Server.MapPath("~/CargaMasiva/") + Path.GetFileNameWithoutExtension(excelUsuario.FileName) + "-" + DateTime.Now.ToString("ddMMyyyyHHmmssfff") + ".xlsx"; //Se crea una copia del archivo excel. Se le asigna la ruta relativa de donde se va a guardar, se obtiene el nombre del archivo sin extension, se le concatena un - y la fecha y hora para hacerlo unico, despues se le adjunta la extension .xlsx
+
+                        if (!System.IO.File.Exists(ruta)) //Si el archivo no existe en la ruta especificada se guarda y se crea uan cadena de conexion para el archivo con el proveedor ole db
+                        {
+                            excelUsuario.SaveAs(ruta); //Se guarda el archivo en en la ruta y con el nombre especificado
+
+                            string cadenaConexion = ConfigurationManager.ConnectionStrings["OleDbConnection"] + ruta; //Creacion de la cadena de conexion
+                            ML.Result resultExcel = BL.Usuario.LeerExcel(cadenaConexion);
+
+                            if (resultExcel.Objects.Count > 0)
+                            {
+                                ML.ResultExcel resultValidacion = BL.Usuario.ValidarExcel(resultExcel.Objects);
+
+                                if (resultValidacion.Errores.Count > 0)
+                                {
+                                    ViewBag.ErroresExcel = resultValidacion.Errores;
+                                    return PartialView("_ErroresExcel");
+                                }
+                                else
+                                {
+                                    Session["RutaExcel"] = ruta;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //Vuelve a cargar el archivo porque ya existe
+                            ViewBag.MensajeError = "El archivo ya existe, vuelve a cargar uno";
+                            ViewBag.ErroresExcel = new List<object>();
+                            return PartialView("_ErroresExcel");
+                        }
+                    }
+                    else
+                    {
+                        //El archivo no es un excel
+                        ViewBag.MensajeError = "El archivo adjunto no es un Excel";
+                        ViewBag.ErroresExcel = new List<object>();
+                        return PartialView("_ErroresExcel");
+                    }
+                }
+                else
+                {
+                    //El usuario no adjuntó un archivo
+                    ViewBag.MensajeError = "No adjuntaste un archivo";
+                    ViewBag.ErroresExcel = new List<object>();
+                    return PartialView("_ErroresExcel");
+                }
+
+            } else
+            {
+                string cadenaConexion = ConfigurationManager.ConnectionStrings["OleDbConnection"] + Session["RutaExcel"].ToString();
+
+                ML.Result resultLeer = BL.Usuario.LeerExcel(cadenaConexion);
+
+                if (resultLeer.Objects.Count > 0)
+                {
+                    foreach (ML.Usuario usuario in resultLeer.Objects)
+                    {
+                        ML.Result resultInsertar = BL.Usuario.AddEF(usuario);
+
+                        if (!resultInsertar.Correct)
+                        {
+                            //Mostrar el error que salió
+                            ViewBag.MensajeError = "Hubo un error en la inserción";
+                            ViewBag.ErroresExcel = new List<object>();
+                            return PartialView("_ErroresExcel");
+                        }
+                    }
+                    ViewBag.MensajeCorrecto = "La inserción se hizo correctamente";
+                    ViewBag.ErroresExcel = new List<object>();
+                    return PartialView("_ErroresExcel");
+                }
+                Session["RutaExcel"] = null;
+            }
+            return RedirectToAction("GetAll");
+        }
     }
 }

@@ -3,6 +3,7 @@ using ML;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -32,11 +33,13 @@ namespace BL
                         usuario.Estatus = estatus;
 
                         result.Correct = true;
-                    } else
+                    }
+                    else
                     {
                         result.Correct = false;
                     }
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     result.Correct = false;
                     result.ErrorMessage = ex.Message;
@@ -53,26 +56,231 @@ namespace BL
             ML.Result result = new ML.Result();
 
             Console.WriteLine("Carga masiva");
-            string ruta = @"C:\Users\digis\Documents\LILIANA_GARCIA_GONZALEZ\Otros\cargaMasiva.txt";
+            string ruta = @"C:\Users\digis\Documents\LILIANA_GARCIA_GONZALEZ\Otros\cargaMasiva.txt"; //Ruta absoluta del txt
             try
             {
-                StreamReader streamReader = new StreamReader(ruta);
+                StreamReader streamReader = new StreamReader(ruta); //Se crea un streamreader con el parametro de ruta
                 string fila = "";
-                while ((fila = streamReader.ReadLine()) != null)
+
+                fila = streamReader.ReadLine(); //Se lee la primera fila que es de los encabezados y la ignora
+
+                while ((fila = streamReader.ReadLine()) != null) //si la siguiente fila no es nula...
                 {
-                    Console.WriteLine(fila);
+                    string[] valores = fila.Split('|'); //Los valores del txt se separan cada que encuentre un |
+
+                    //Se instancian los modelos a utilizar
+                    ML.Usuario usuario = new ML.Usuario();
+                    usuario.Rol = new ML.Rol();
+                    usuario.Direccion = new ML.Direccion();
+                    usuario.Direccion.Colonia = new ML.Colonia();
+                    usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                    usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+                    //Se van sacando los valores del txt
+                    usuario.Nombre = valores[0];
+                    usuario.ApellidoPaterno = valores[1];
+                    usuario.ApellidoMaterno = valores[2];
+                    usuario.Celular = valores[3];
+                    usuario.UserName = valores[4];
+                    usuario.Email = valores[5];
+                    usuario.Password = valores[6];
+                    usuario.FechaNacimiento = valores[7];
+                    usuario.Sexo = valores[8];
+                    usuario.Telefono = valores[9];
+                    usuario.Estatus = Convert.ToBoolean(Convert.ToInt32(valores[10]));
+                    usuario.CURP = valores[11].ToUpper();
+                    usuario.Rol.IdRol = Convert.ToInt32(valores[12]);
+                    usuario.Direccion.Calle = valores[13];
+                    usuario.Direccion.NumeroInterior = valores[14];
+                    usuario.Direccion.NumeroExterior = valores[15];
+                    usuario.Direccion.Colonia.IdColonia = Convert.ToInt32(valores[16]);
+
+                    BL.Usuario.AddEF(usuario); //Se agregan a la BD 
                 }
                 result.Correct = true;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 result.Correct = false;
-                result.ErrorMessage = ex.Message;   
+                result.ErrorMessage = ex.Message;
                 result.Ex = ex;
             }
 
             return result;
         }
 
+        public static ML.Result LeerExcel(string cadenaConexion)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (OleDbConnection context = new OleDbConnection(cadenaConexion))
+                {
+                    string query = "SELECT * FROM[Sheet1$]";
+                    using (OleDbCommand cmd = new OleDbCommand(query))
+                    {
+                        cmd.CommandText = query;
+                        cmd.Connection = context;
+
+                        OleDbDataAdapter adapter = new OleDbDataAdapter();
+                        adapter.SelectCommand = cmd;
+
+                        DataTable tablaUsuario = new DataTable();
+                        adapter.Fill(tablaUsuario);
+
+                        if (tablaUsuario.Rows.Count > 0)
+                        {
+                            result.Objects = new List<object>();
+                            foreach (DataRow row in tablaUsuario.Rows)
+                            {
+                                ML.Usuario usuario = new ML.Usuario();
+                                usuario.Rol = new ML.Rol();
+                                usuario.Direccion = new ML.Direccion();
+                                usuario.Direccion.Colonia = new ML.Colonia();
+                                usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                                usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+                                usuario.Nombre = row[0].ToString();
+                                usuario.ApellidoPaterno = row[1].ToString();
+                                usuario.ApellidoMaterno = row[2].ToString();
+                                usuario.Celular = row[3].ToString();
+                                usuario.UserName = row[4].ToString();
+                                usuario.Email = row[5].ToString();
+                                usuario.Password = row[6].ToString();
+                                usuario.FechaNacimiento = row[7].ToString();
+                                usuario.Sexo = row[8].ToString();
+                                usuario.Telefono = row[9].ToString();
+                                usuario.CURP = row[10].ToString();
+                                if (row[11].ToString() == "" || row[11].ToString() == null)
+                                {
+                                    usuario.Rol.IdRol = 0;
+                                }
+                                else
+                                {
+                                    usuario.Rol.IdRol = Convert.ToInt32(row[11].ToString());
+                                }
+                                usuario.Direccion.Calle = row[12].ToString();
+                                usuario.Direccion.NumeroInterior = row[13].ToString();
+                                usuario.Direccion.NumeroExterior = row[14].ToString();
+
+                                if (row[15].ToString() == "" || row[15].ToString() == null)
+                                {
+                                    usuario.Direccion.Colonia.IdColonia = 0;
+                                }
+                                else
+                                {
+                                    usuario.Direccion.Colonia.IdColonia = Convert.ToInt32(row[15].ToString());
+                                }
+
+                                result.Objects.Add(usuario);
+                            }
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+
+            return result;
+        }
+
+        public static ML.ResultExcel ValidarExcel(List<object> registros)
+        {
+            ML.ResultExcel result = new ML.ResultExcel();
+
+            result.Errores = new List<object>();
+
+            int contador = 1;
+            foreach (ML.Usuario usuario in registros)
+            {
+                ML.ResultExcel resultValidacion = new ML.ResultExcel();
+                result.NumeroRegistro = contador;
+
+                if (usuario.Nombre.Length > 50 || usuario.Nombre == "" || usuario.Nombre == null)
+                {
+                    resultValidacion.ErrorMessage += "El nombre del registro " + contador + " es muy largo o está vacío";
+                }
+                if (usuario.ApellidoPaterno.Length > 50 || usuario.ApellidoPaterno == "" || usuario.ApellidoPaterno == null)
+                {
+                    resultValidacion.ErrorMessage += "El apellido paterno del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.ApellidoMaterno.Length > 50)
+                {
+                    resultValidacion.ErrorMessage += "El apellido materno del registro " + contador + " es muy largo";
+                }
+                if (usuario.Celular.Length > 20 || usuario.Celular == "" || usuario.Celular == null)
+                {
+                    resultValidacion.ErrorMessage += "El celular  del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.UserName.Length > 50 || usuario.UserName == "" || usuario.UserName == null)
+                {
+                    resultValidacion.ErrorMessage += "El Username del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.Email.Length > 254 || usuario.Email == "" || usuario.Email == null)
+                {
+                    resultValidacion.ErrorMessage += "El email del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.Password.Length > 50 || usuario.Password == "" || usuario.Password == null)
+                {
+                    resultValidacion.ErrorMessage += "La contraseña del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.FechaNacimiento == "" || usuario.FechaNacimiento == null)
+                {
+                    resultValidacion.ErrorMessage += "La fecha de nacimiento  del registro " + contador + "está vacio o es muy largo";
+                }
+                if (usuario.Sexo.Length > 2 || usuario.Sexo == "" || usuario.Sexo == null)
+                {
+                    resultValidacion.ErrorMessage += "El sexo del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.Telefono.Length > 20 || usuario.Telefono == "" || usuario.Telefono == null)
+                {
+                    resultValidacion.ErrorMessage += "El telefono del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.CURP.Length > 50 || usuario.CURP == "" || usuario.CURP == null)
+                {
+                    resultValidacion.ErrorMessage += "El CURP del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.Rol.IdRol == 0 || usuario.Rol.IdRol > 6)
+                {
+                    resultValidacion.ErrorMessage += "El Id rol del registro " + contador + " está vacio o no existe";
+                }
+                if (usuario.Direccion.Calle.Length > 50 || usuario.Direccion.Calle == "" || usuario.Direccion.Calle == null)
+                {
+                    resultValidacion.ErrorMessage += "La calle del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.Direccion.NumeroInterior.Length > 20)
+                {
+                    resultValidacion.ErrorMessage += "El número interior del registro " + contador + " es muy largo";
+                }
+                if (usuario.Direccion.NumeroExterior.Length > 20 || usuario.Direccion.NumeroExterior == "" || usuario.Direccion.NumeroExterior == null)
+                {
+                    resultValidacion.ErrorMessage += "El número exterior del registro " + contador + " está vacio o es muy largo";
+                }
+                if (usuario.Direccion.Colonia.IdColonia == 0 || usuario.Direccion.Colonia.IdColonia > 3598)
+                {
+                    resultValidacion.ErrorMessage += "El Id colonia del registro " + contador + " está vacío o no existe";
+                }
+
+                if (resultValidacion.ErrorMessage != null || resultValidacion.ErrorMessage == "")
+                {
+                    result.Errores.Add(resultValidacion);
+                }
+
+                contador++;
+            }
+
+            return result;
+        }
 
         //METODOS CON LINQ
         //Metodo Add
@@ -97,6 +305,7 @@ namespace BL
                     usuarioDB.Telefono = usuario.Telefono;
                     usuarioDB.Estatus = usuario.Estatus;
                     usuarioDB.CURP = usuario.CURP;
+                    usuarioDB.Imagen = usuario.Imagen;
                     usuarioDB.IdRol = usuario.Rol.IdRol;
 
                     context.Usuarios.Add(usuarioDB); //Se crea el query
@@ -299,7 +508,8 @@ namespace BL
                             result.Objects.Add(usuario);
                         }
                         result.Correct = true;
-                    } else
+                    }
+                    else
                     {
                         result.Correct = false;
                         result.ErrorMessage = "No hay registros";
@@ -361,7 +571,8 @@ namespace BL
                         result.ErrorMessage = "No existe un registro con ese ID";
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 result.Correct = false;
                 result.ErrorMessage = ex.Message;
@@ -388,10 +599,12 @@ namespace BL
                     if (filasAfectadas > 0)
                     {
                         result.Correct = true;
+                        result.ErrorMessage = "Se realizó la inserción correctamente";
                     }
                     else
                     {
                         result.Correct = false;
+                        result.ErrorMessage = "No se realizó la inserción correctamente";
                     }
                 }
             }
@@ -580,7 +793,8 @@ namespace BL
                         if (query.IdRol != null)
                         {
                             usuario.Rol.IdRol = query.IdRol.Value;
-                        } else
+                        }
+                        else
                         {
                             usuario.Rol.IdRol = 0;
                         }
@@ -597,7 +811,7 @@ namespace BL
                         result.Object = usuario;
                         result.Correct = true;
                     }
-                    
+
                 }
             }
             catch (Exception ex)

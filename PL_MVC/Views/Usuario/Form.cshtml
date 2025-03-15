@@ -398,7 +398,6 @@
         var ErrorMessage = inputField.parentNode.querySelector('.errorPassword')
         ErrorMessage.textContent = ''
         var password = inputField.value
-        var regex = new RegExp('/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S$/')
 
         if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm.test(password))) {
             evt.preventDefault()
