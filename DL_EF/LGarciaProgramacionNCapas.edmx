@@ -155,7 +155,6 @@
           <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
           <Parameter Name="Sexo" Type="char" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="CURP" Type="varchar" Mode="In" />
           <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
@@ -273,26 +272,6 @@
           <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ColoniaGetAll" />
-          <FunctionImport Name="UsuarioDireccionAdd">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Celular" Mode="In" Type="String" />
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
-            <Parameter Name="CURP" Mode="In" Type="String" />
-            <Parameter Name="Imagen" Mode="In" Type="Binary" />
-            <Parameter Name="IdRol" Mode="In" Type="Int32" />
-            <Parameter Name="Calle" Mode="In" Type="String" />
-            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
-            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
-            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="UsuarioDireccioUpdate">
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -332,6 +311,25 @@
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioDireccionAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Celular" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
+            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
+            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Rol">
@@ -704,7 +702,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UsuarioDireccioDelete" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccioDelete" />
-          <FunctionImportMapping FunctionImportName="UsuarioDireccionAdd" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccionAdd" />
           <FunctionImportMapping FunctionImportName="UsuarioDireccioUpdate" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccioUpdate" />
           <FunctionImportMapping FunctionImportName="UsuarioGetAllBusquedaAbierta" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioGetAllBusquedaAbierta">
             <ResultMapping>
@@ -826,6 +823,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioDireccionAdd" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccionAdd" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

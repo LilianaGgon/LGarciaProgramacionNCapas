@@ -4,7 +4,6 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Usuario</h2>
 
 <div class="container">
@@ -16,18 +15,21 @@
         <div class="row align-items-start">
             <div class="col">
                 @Html.LabelFor(model => model.Nombre, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control input", @onkeypress = "ValidacionSoloLetras(event)" })
-                <span class="errorSoloLetras"></span>
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control inputObligatorio", @onkeypress = "ValidacionSoloLetras(event)" })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                <p class="errorSoloLetras mensajeError"></p>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control input", @onkeypress = "ValidacionSoloLetras(event)" })
-                <span class="errorSoloLetras"></span>
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control inputObligatorio", @onkeypress = "ValidacionSoloLetras(event)" })
+                @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                <p class="errorSoloLetras mensajeError"></p>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "form-label" })
                 @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control input", @onkeypress = "ValidacionSoloLetras(event)" })
-                <span class="errorSoloLetras"></span>
+                @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                <p class="errorSoloLetras"></p>
             </div>
         </div>
 
@@ -35,59 +37,62 @@
             <div class="col">
                 @Html.LabelFor(model => model.Celular, new { @class = "form-label" })
                 @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @onkeypress = "ValidacionSoloNumeros(event)" })
-                <span class="errorSoloNumeros"></span>
+                @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+                <p class="errorSoloNumeros"></p>
 
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.UserName, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @onkeypress = "ValidacionUserName(event)" })
-                <span class="errorUsername"></span>
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control inputObligatorio", @onkeypress = "ValidacionUserName(event)" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                <p class="errorUsername mensajeError"></p>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.Email, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @onblur = "ValidacionEmail(event)" })
-                <span class="errorEmail"></span>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control inputObligatorio", @onblur = "ValidacionEmail(event)" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <p class="errorEmail mensajeError"></p>
             </div>
         </div>
 
         <div class="row align-items-center">
             <div class="col">
                 @Html.LabelFor(model => model.Password, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control input", @onblur = "ValidacionPassword(event)", id = "password" })
-                <span class="errorPassword"></span>
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control inputObligatorio", @onblur = "ValidacionPassword(event)", id = "password" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <p class="errorPassword mensajeError"></p>
                 @Html.Label("Confirmar Password", new { @class = "form-label" })
-                <input type="text" class="form-control input" onblur="ConfirmacionPassword(event)" id="inptConfirmacionPassword" />
-                <span class="errorCoincidenciaPassword"></span>
+                <input type="text" class="form-control inputObligatorio" onblur="ConfirmacionPassword(event)" id="inptConfirmacionPassword" />
+                <p class="errorCoincidenciaPassword mensajeError"></p>
             </div>
             <div class="col">
                 @Html.Label("Fecha de Nacimiento", new { @class = "form-label", name = "FechaNacimiento" })
                 @*<input type="text" id="datepicker">*@
-                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", id = "datepicker" })
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control inputObligatorio", id = "datepicker" })
+                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                <p class="mensajeError"></p>
             </div>
             <div class="col">
                 @Html.Label("Mujer")
                 @Html.RadioButtonFor(model => model.Sexo, "M", false)
                 @Html.Label("Hombre")
                 @Html.RadioButtonFor(model => model.Sexo, "H", false)
+                @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="row align-items-center">
             <div class="col">
                 @Html.LabelFor(model => model.Telefono, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control input", @onkeypress = "ValidacionSoloNumeros(event)" })
-                <span class="errorSoloNumeros"></span>
-            </div>
-            <div class="col">
-                @Html.Label("Activo")
-                @Html.RadioButtonFor(model => model.Estatus, "True", false)
-                @Html.Label("No activo")
-                @Html.RadioButtonFor(model => model.Estatus, "False", false)
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control inputObligatorio", @onkeypress = "ValidacionSoloNumeros(event)" })
+                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                <p class="errorSoloNumeros mensajeError"></p>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.CURP, new { @class = "form-label" })
                 @Html.TextBoxFor(model => model.CURP, new { @class = "form-control input", @onblur = "ValidacionCurp(event)" })
-                <span class="errorCurp"></span>
+                @Html.ValidationMessageFor(model => model.CURP, "", new { @class = "text-danger" })
+                <p class="errorCurp"></p>
             </div>
         </div>
 
@@ -98,6 +103,8 @@
                 @*Se le pasa el modelo, el modelo es Rol y va a acceder a IdRol*@
                 @*Selecicona una nueva lista, va a leer el modelo rol en su propiedad roles*@
                 @*El primer parametro es el que va a leer y el segundo es el que va a ver el usuario*@
+                @Html.ValidationMessageFor(model => model.Rol.IdRol, "", new { @class = "text-danger" })
+                <p class="mensajeError"></p>
             </div>
         </div>
 
@@ -125,18 +132,21 @@
         <div class="row align-items-center">
             <div class="col">
                 @Html.LabelFor(model => model.Direccion.Calle, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control input", @onkeypress = "ValidacionNumerosLetras(event)" })
-                <span class="errorNumerosLetras"></span>
+                @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control inputObligatorio", @onkeypress = "ValidacionNumerosLetras(event)" })
+                @Html.ValidationMessageFor(model => model.Direccion.Calle, "", new { @class = "text-danger" })
+                <p class="errorNumerosLetras mensajeError"></p>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.Direccion.NumeroInterior, new { @class = "form-label" })
                 @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control input", @onkeypress = "ValidacionNumerosLetras(event)" })
-                <span class="errorNumerosLetras"></span>
+                @Html.ValidationMessageFor(model => model.Direccion.NumeroInterior, "", new { @class = "text-danger" })
+                <p class="errorNumerosLetras"></p>
             </div>
             <div class="col">
                 @Html.LabelFor(model => model.Direccion.NumeroExterior, new { @class = "form-label" })
-                @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control input", @onkeypress = "ValidacionNumerosLetras(event)" })
-                <span class="errorNumerosLetras"></span>
+                @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control inputObligatorio", @onkeypress = "ValidacionNumerosLetras(event)" })
+                @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior, "", new { @class = "text-danger" })
+                <p class="errorNumerosLetras mensajeError"></p>
             </div>
         </div>
 
@@ -144,6 +154,10 @@
             <div class="col">
                 @Html.Label("Estado", new { @class = "form-label" })
                 @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre"), "Selecciona un estado", new { @onchange = "MunicipioGetByIdEstado()", @id = "ddlEstado", @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado, "", new { @class = "text-danger" })
+                <p class="mensajeError"></p>
+
+
             </div>
 
 
@@ -152,13 +166,18 @@
                 <div class="col">
                     @Html.Label("Municipio", new { @class = "form-label" })
                     @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(String.Empty), "Selecciona un municipio", new { @onchange = "ColoniaGetByIdMunicipio()", @id = "ddlMunicipio", @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio, "", new { @class = "text-danger" })
+                    <p class="mensajeError"></p>
                 </div>
             }
             else
             {
                 <div class="col">
                     @Html.Label("Municipio", new { @class = "form-label" })
-                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Selecciona un municipio", new { @id = "ddlMunicipio", @class = "form-select" })
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Selecciona un municipio", new { @id = "ddlMunicipio", @class = "form-select inputObligatorio" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio, "", new { @class = "text-danger" })
+                    <p class="mensajeError"></p>
+
                 </div>
             }
 
@@ -168,24 +187,30 @@
                 <div class="col">
                     @Html.Label("Colonia", new { @class = "form-label" })
                     @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(String.Empty), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Colonia, "", new { @class = "text-danger" })
                 </div>
+                <p class="mensajeError"></p>
+
             }
             else
             {
                 <div class="col">
                     @Html.Label("Colonia", new { @class = "form-label" })
-                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select" })
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select inputObligatorio" })
+                    @Html.ValidationMessageFor(model => model.Direccion.Colonia, "", new { @class = "text-danger" })
+                <p class="mensajeError"></p>
+
                 </div>
             }
 
             @*<div class="col">
-                    @Html.Label("Municipio", new { @class = "form-label" })
-                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(String.Empty), "Selecciona un municipio", new { @onchange = "ColoniaGetByIdMunicipio()", @id = "ddlMunicipio", @class = "form-select" })
-                </div>
-                <div class="col">
-                    @Html.Label("Colonia", new { @class = "form-label" })
-                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(String.Empty), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select" })
-                </div>*@
+            @Html.Label("Municipio", new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(String.Empty), "Selecciona un municipio", new { @onchange = "ColoniaGetByIdMunicipio()", @id = "ddlMunicipio", @class = "form-select" })
+        </div>
+        <div class="col">
+            @Html.Label("Colonia", new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(String.Empty), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select" })
+        </div>*@
         </div>
 
         <div class="row align-items-center">
@@ -197,9 +222,25 @@
 </div>
 
 @Scripts.Render("~/bundles/jquery") <!--Importamos JQuery-->
-@Scripts.Render("~/bundles/jqueryui")
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 <script>
-    function MunicipioGetByIdEstado() { //Nombre de la funcion
+    var urlDDLMunicipio = "@Url.Action("MunicipioGetByIdEstado", "Usuario")?idEstado="
+    
+    var urlDDLColonia = "@Url.Action("ColoniaGetByIdMunicipio", "Usuario")?idMunicipio="
+
+</script>
+
+<script src="~/Scripts/Usuario/Form/Validaciones.js"></script>
+<script src="~/Scripts/Usuario/Form/DDL.js"></script>
+<script src="~/Scripts/Usuario/Form/DatePicker.js"></script>
+
+@*DDL Colonia y Municipio*@
+<script>
+    @*function MunicipioGetByIdEstado() { //Nombre de la funcion
         let ddl = $('#ddlEstado').val() //Obtiene el valor del select de la etiqueta con id ddlEstado y lo guarda en una variable let
         //console.log(ddl)
         $('#ddlMunicipio').empty()
@@ -227,12 +268,11 @@
                 console.log(xhr)
             }
         })
-    }
+    }*@
 </script>
 
-
 <script>
-    function ColoniaGetByIdMunicipio() {
+    @*function ColoniaGetByIdMunicipio() {
         let ddl = $('#ddlMunicipio').val()
         //console.log(ddl)
         $('#ddlColonia').empty()
@@ -256,196 +296,195 @@
                 console.log(xhr)
             }
         })
-    }
+    }*@
 </script>
 
 
+@*Validar imagen*@
 <script>
-    function ValidarImagen() {
-        var input = $('#inptFileImgUsuario')[0].files[0].name.split(".").pop().toLowerCase() //De lo agregado en el input con id inptFileImgUsuario va a acceder a su posicion 0 del objeto, despues va a tomar la posicion 0 del files. de files toma la propiedad name y la va a dividir en un array cuando encuentre el punto. Pop va a eliminar la primera parte del array y se queda solo con las letras de la extension del archivo. En caso de que las letras de extension del archivo esté en mayúculas, las pasa a minusculas para no generar falsos errores.
-        console.log(input) //imprime la extension con las modificaciones ya hechas
+    //function ValidarImagen() {
+    //    var input = $('#inptFileImgUsuario')[0].files[0].name.split(".").pop().toLowerCase() //De lo agregado en el input con id inptFileImgUsuario va a acceder a su posicion 0 del objeto, despues va a tomar la posicion 0 del files. de files toma la propiedad name y la va a dividir en un array cuando encuentre el punto. Pop va a eliminar la primera parte del array y se queda solo con las letras de la extension del archivo. En caso de que las letras de extension del archivo esté en mayúculas, las pasa a minusculas para no generar falsos errores.
+    //    console.log(input) //imprime la extension con las modificaciones ya hechas
 
-        var extensionesValidas = ['png', 'jpg', 'jpeg', 'webp'] //array con extensiones validas para comparar el input
-        var bandera = false //Bandera para comprobar que la extension es valida o no
+    //    var extensionesValidas = ['png', 'jpg', 'jpeg', 'webp'] //array con extensiones validas para comparar el input
+    //    var bandera = false //Bandera para comprobar que la extension es valida o no
 
-        //Ciclo para comparar input con extensiones válidas
-        for (var i = 0; i <= extensionesValidas.length - 1; i++) {
-            if (input == extensionesValidas[i]) {
-                bandera = true
-            }
-        }
+    //    //Ciclo para comparar input con extensiones válidas
+    //    for (var i = 0; i <= extensionesValidas.length - 1; i++) {
+    //        if (input == extensionesValidas[i]) {
+    //            bandera = true
+    //        }
+    //    }
 
-        if (!bandera) {
-            bandera = false
-            alert('El archivo no es válido. Ingresa un archivo con extensión png, jpg, jpeg o webp.') //Avisa que el archivo no es válido
-            $('#inptFileImgUsuario').val("") //Vacia el input para poder cargar otro archivo
-        }
-    }
+    //    if (!bandera) {
+    //        bandera = false
+    //        alert('El archivo no es válido. Ingresa un archivo con extensión png, jpg, jpeg o webp.') //Avisa que el archivo no es válido
+    //        $('#inptFileImgUsuario').val("") //Vacia el input para poder cargar otro archivo
+    //    }
+    //}
 
-    function RemplazarImagen(input) {
-        if (input.files) {
-            var reader = new FileReader();
-            reader.onload = function (elemento) {
-                $('#imgUsuario').attr('src', elemento.target.result)
-            }
-            reader.readAsDataURL(input.files[0])
-        }
-    }
+    //function RemplazarImagen(input) {
+    //    if (input.files) {
+    //        var reader = new FileReader();
+    //        reader.onload = function (elemento) {
+    //            $('#imgUsuario').attr('src', elemento.target.result)
+    //        }
+    //        reader.readAsDataURL(input.files[0])
+    //    }
+    //}
 </script>
 
 
-<link rel="stylesheet" href="/resources/demos/style.css">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+@*DatePicker*@
 <script>
-        $("#datepicker").datepicker({
-            dateFormat: "yy-mm-dd",
-            showOtherMonths: true,
-            selectOtherMonths: true,
-            changeMonth: true,
-            changeYear: true
-        });
+    //$("#datepicker").datepicker({
+    //    dateFormat: "yy-mm-dd",
+    //    showOtherMonths: true,
+    //    selectOtherMonths: true,
+    //    changeMonth: true,
+    //    changeYear: true
+    //});
 </script>
 
 
+@*Validaciones FrontEnd*@
 <script>
-    function ValidacionSoloLetras(evt) { //Función para validar si solo se ingresan letras
-        var entrada = String.fromCharCode(evt.which) //entrada toma el valor de la letra seleccionada en formato Unicode
-        var inputField = evt.target; //
-        var ErrorMessage = inputField.parentNode.querySelector('.errorSoloLetras') //El ErrorMessage lo ingresa en el span asignado
-        ErrorMessage.textContent = ''; //Reinicia el mensaje de error y lo pone vacio
-        if (!(/^[a-z A-Z]$/.test(entrada))) { //Evalua si el caracter ingresado es diferente a un caracter valido en la expresion regular. Test hace el testeo de la letra
-            evt.preventDefault() //Evita que se siga con el proceso con en el que estaba
-            inputField.style.borderColor = 'red' //Colorea el borde del span de color rojo cuando se ingresa algo diferente a una letra
-            ErrorMessage.textContent = 'Solo se permiten letras' //El mensaje de error de lanza es que solo se permiten letras
-        } else {
-            inputField.style.borderColor = 'green' //Colorea el borde del span de color verde cuando se aceptan caracteres validos
-        }
-    }
+    //function ValidacionSoloLetras(evt) { //Función para validar si solo se ingresan letras
+    //    var entrada = String.fromCharCode(evt.which) //entrada toma el valor de la letra seleccionada en formato Unicode
+    //    var inputField = evt.target; //
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorSoloLetras') //El ErrorMessage lo ingresa en el span asignado
+    //    ErrorMessage.textContent = ''; //Reinicia el mensaje de error y lo pone vacio
+    //    if (!(/^[a-z A-Z]$/.test(entrada))) { //Evalua si el caracter ingresado es diferente a un caracter valido en la expresion regular. Test hace el testeo de la letra
+    //        evt.preventDefault() //Evita que se siga con el proceso con en el que estaba
+    //        inputField.style.borderColor = 'red' //Colorea el borde del span de color rojo cuando se ingresa algo diferente a una letra
+    //        ErrorMessage.textContent = 'Solo se permiten letras' //El mensaje de error de lanza es que solo se permiten letras
+    //    } else {
+    //        inputField.style.borderColor = 'green' //Colorea el borde del span de color verde cuando se aceptan caracteres validos
+    //    }
+    //}
 
-    function ValidacionSoloNumeros(evt) {
-        var entrada = String.fromCharCode(evt.which)
-        var inputField = evt.target
-        var ErrorMessage = inputField.parentNode.querySelector('.errorSoloNumeros')
-        ErrorMessage.textContent = ''
-        if (!(/[0-9]/.test(entrada))) {
-            evt.preventDefault()
-            inputField.style.borderColor = 'red'
-            ErrorMessage.textContent = 'Solo se permiten números'
-        } else {
-            inputField.style.borderColor = 'green'
-        }
-    }
+    //function ValidacionSoloNumeros(evt) {
+    //    var entrada = String.fromCharCode(evt.which)
+    //    var inputField = evt.target
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorSoloNumeros')
+    //    ErrorMessage.textContent = ''
+    //    if (!(/[0-9]/.test(entrada))) {
+    //        evt.preventDefault()
+    //        inputField.style.borderColor = 'red'
+    //        ErrorMessage.textContent = 'Solo se permiten números'
+    //    } else {
+    //        inputField.style.borderColor = 'green'
+    //    }
+    //}
 
-    function ValidacionEmail(evt) {
-        var inputField = evt.target
-        var ErrorMessage = inputField.parentNode.querySelector('.errorEmail')
-        ErrorMessage.textContent = ''
-        var entrada = inputField.value
-        if (!(/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(entrada))) {
-            evt.preventDefault()
-            inputField.style.borderColor = 'red'
-            ErrorMessage.textContent = 'ejemplo@email.com'
-        } else {
-            inputField.style.borderColor = 'green'
-        }
-    }
+    //function ValidacionEmail(evt) {
+    //    var inputField = evt.target
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorEmail')
+    //    ErrorMessage.textContent = ''
+    //    var entrada = inputField.value
+    //    if (!(/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(entrada))) {
+    //        evt.preventDefault()
+    //        inputField.style.borderColor = 'red'
+    //        ErrorMessage.textContent = 'ejemplo@email.com'
+    //    } else {
+    //        inputField.style.borderColor = 'green'
+    //    }
+    //}
 
-    function ValidacionNumerosLetras(evt) {
-        var entrada = String.fromCharCode(evt.which)
-        var inputField = evt.target
-        var ErrorMessage = inputField.parentNode.querySelector('.errorNumerosLetras')
-        ErrorMessage.textContent = ''
-        if (!(/[aA-zZ 0-9]/.test(entrada))) {
-            evt.preventDefault()
-            inputField.style.borderColor = 'red'
-            ErrorMessage.textContent = 'Solo se permiten números y letras'
-        } else {
-            inputField.style.borderColor = 'green'
-        }
-    }
+    //function ValidacionNumerosLetras(evt) {
+    //    var entrada = String.fromCharCode(evt.which)
+    //    var inputField = evt.target
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorNumerosLetras')
+    //    ErrorMessage.textContent = ''
+    //    if (!(/[aA-zZ 0-9]/.test(entrada))) {
+    //        evt.preventDefault()
+    //        inputField.style.borderColor = 'red'
+    //        ErrorMessage.textContent = 'Solo se permiten números y letras'
+    //    } else {
+    //        inputField.style.borderColor = 'green'
+    //    }
+    //}
 
-    function ValidacionUserName(evt) {
-        var entrada = String.fromCharCode(evt.which)
-        var inputField = evt.target
-        var ErrorMessage = inputField.parentNode.querySelector('.errorUsername')
-        ErrorMessage.textContent = ''
-        if (!(/[aA-zZ0-9_.-]/.test(entrada))) {
-            evt.preventDefault()
-            inputField.style.borderColor = 'red'
-            ErrorMessage.textContent = 'Solo puede contener letras, numeros y signos como: .-_'
-        } else {
-            inputField.style.borderColor = 'green'
-        }
-    }
+    //function ValidacionUserName(evt) {
+    //    var entrada = String.fromCharCode(evt.which)
+    //    var inputField = evt.target
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorUsername')
+    //    ErrorMessage.textContent = ''
+    //    if (!(/[aA-zZ0-9_.-]/.test(entrada))) {
+    //        evt.preventDefault()
+    //        inputField.style.borderColor = 'red'
+    //        ErrorMessage.textContent = 'Solo puede contener letras, numeros y signos como: .-_'
+    //    } else {
+    //        inputField.style.borderColor = 'green'
+    //    }
+    //}
 
-    function ValidacionCurp(evt) {
-        var inputField = evt.target
-        var ErrorMessage = inputField.parentNode.querySelector('.errorCurp')
-        ErrorMessage.textContent = ''
-        var entrada = inputField.value
-        if (!(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/.test(entrada))) {
-            evt.preventDefault()
-            inputField.style.borderColor = 'red'
-            ErrorMessage.textContent = 'Curp inválido'
-        } else {
-            inputField.style.borderColor = 'green'
-        }
-    }
+    //function ValidacionCurp(evt) {
+    //    var inputField = evt.target
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorCurp')
+    //    ErrorMessage.textContent = ''
+    //    var entrada = inputField.value
+    //    if (!(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/.test(entrada))) {
+    //        evt.preventDefault()
+    //        inputField.style.borderColor = 'red'
+    //        ErrorMessage.textContent = 'Curp inválido'
+    //    } else {
+    //        inputField.style.borderColor = 'green'
+    //    }
+    //}
 
-    function ValidacionPassword(evt) {
-        var inputField = evt.target
-        var ErrorMessage = inputField.parentNode.querySelector('.errorPassword')
-        ErrorMessage.textContent = ''
-        var password = inputField.value
+    //function ValidacionPassword(evt) {
+    //    var inputField = evt.target
+    //    var ErrorMessage = inputField.parentNode.querySelector('.errorPassword')
+    //    ErrorMessage.textContent = ''
+    //    var password = inputField.value
 
-        if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm.test(password))) {
-            evt.preventDefault()
-            inputField.style.borderColor = 'red'
-            ErrorMessage.textContent = 'Mínimo 8 caracteres, una mayuscula, una minuscula y un signo.'
-        } else {
-            inputField.style.borderColor = 'green'
-        }
-    }
+    //    if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm.test(password))) {
+    //        evt.preventDefault()
+    //        inputField.style.borderColor = 'red'
+    //        ErrorMessage.textContent = 'Mínimo 8 caracteres, una mayuscula, una minuscula y un signo.'
+    //    } else {
+    //        inputField.style.borderColor = 'green'
+    //    }
+    //}
 
-    function ConfirmacionPassword(evt) {
-        var password = $('#password').val()
-        var confirmacionPassword = $('#inptConfirmacionPassword').val()
-        $('.errorCoincidenciaPassword').html('');
-        if (password != confirmacionPassword) {
-            document.getElementById("inptConfirmacionPassword").style.borderColor = "red"
-            $('.errorCoincidenciaPassword').html('Las contraseñas no coinciden');
-        } else {
-            document.getElementById("inptConfirmacionPassword").style.borderColor = "green"
+    //function ConfirmacionPassword(evt) {
+    //    var password = $('#password').val()
+    //    var confirmacionPassword = $('#inptConfirmacionPassword').val()
+    //    $('.errorCoincidenciaPassword').html('');
+    //    if (password != confirmacionPassword) {
+    //        document.getElementById("inptConfirmacionPassword").style.borderColor = "red"
+    //        $('.errorCoincidenciaPassword').html('Las contraseñas no coinciden');
+    //    } else {
+    //        document.getElementById("inptConfirmacionPassword").style.borderColor = "green"
 
-        }
-    }
+    //    }
+    //}
 
-    function validarFormulario(evt) {
-        let isValid = true;
+    //function validarFormulario(evt) {
+    //    let isValid = true;
 
-        $("#form input").each(function () {
-            let $input = $(this);
-            let valor = $input.val().trim();
-            let $span = $input.siblings("span");
+    //    $("#form input").each(function () {
+    //        let $input = $(this);
+    //        let valor = $input.val().trim();
+    //        let $span = $input.siblings("span");
 
-            if (valor === "") {
-                isValid = false;
-                $input.css("border-color", "red");
-                $span.text("Este campo no puede estar vacío").css("color", "red");
-            } else {
-                $input.css("border-color", "green");
-                $span.text("").css("color", "green");
-            }
-        });
+    //        if (valor === "") {
+    //            isValid = false;
+    //            $input.css("border-color", "red");
+    //            //$span.text("Este campo no puede estar vacío").css("color", "red");
+    //        } else {
+    //            $input.css("border-color", "green");
+    //            $span.text("").css("color", "green");
+    //        }
+    //    });
 
-        if (!isValid) {
-            evt.preventDefault();
-        }
-    }
+    //    if (!isValid) {
+    //        evt.preventDefault();
+    //    }
+    //}
 
-    document.getElementById("form").addEventListener("submit", validarFormulario);
-
+    //document.getElementById("form").addEventListener("submit", validarFormulario);
 
 
 </script>

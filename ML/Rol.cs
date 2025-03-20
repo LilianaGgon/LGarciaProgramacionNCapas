@@ -12,7 +12,7 @@ namespace ML
     {
         [DisplayName("Rol")]
         [Required(ErrorMessage = "El rol es obligatorio")]
-        [RegularExpression(@"/[0-6]/")]
+        [RegularExpression(@"[0-6]")]
         public int IdRol { get; set; }
 
         public string Nombre { get; set; }
