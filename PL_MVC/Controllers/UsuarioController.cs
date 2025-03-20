@@ -106,6 +106,25 @@ namespace PL_MVC.Controllers
         [HttpPost] //Decorador de metodo Form para agregar informacion
         public ActionResult Form(ML.Usuario usuario)
         {
+            if (!ModelState.IsValid)
+            {
+                //regresa informacion dio
+                //llenar ddl
+                ML.Result resultRol = BL.Rol.GetAll();
+                usuario.Rol.Roles = resultRol.Objects;
+
+                ML.Result resultEstado = BL.Estado.GetAll();
+                usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstado.Objects;
+
+                ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
+                usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipio.Objects;
+
+                ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
+                usuario.Direccion.Colonia.Colonias = resultColonia.Objects;
+
+                return View(usuario);
+            }
+
             HttpPostedFileBase file = Request.Files["inptFileImgUsuario"];
             if (file != null)
             {
@@ -234,7 +253,8 @@ namespace PL_MVC.Controllers
                     return PartialView("_ErroresExcel");
                 }
 
-            } else
+            }
+            else
             {
                 string cadenaConexion = ConfigurationManager.ConnectionStrings["OleDbConnection"] + Session["RutaExcel"].ToString();
 
@@ -242,17 +262,25 @@ namespace PL_MVC.Controllers
 
                 if (resultLeer.Objects.Count > 0)
                 {
+                    int contador = 1;
+
                     foreach (ML.Usuario usuario in resultLeer.Objects)
                     {
-                        ML.Result resultInsertar = BL.Usuario.AddEF(usuario);
-
-                        if (!resultInsertar.Correct)
-                        {
-                            //Mostrar el error que salió
-                            ViewBag.MensajeError = "Hubo un error en la inserción";
-                            ViewBag.ErroresExcel = new List<object>();
-                            return PartialView("_ErroresExcel");
-                        }
+                        //contador++;
+                        //if (ModelState.IsValid)
+                        //{
+                            ML.Result resultInsertar = BL.Usuario.AddEF(usuario);
+                            if (!resultInsertar.Correct)
+                            {
+                                //Mostrar el error que salió
+                                ViewBag.MensajeError = "Hubo un error en la inserción del usuario " + contador;
+                                ViewBag.ErroresExcel = new[] { resultInsertar };
+                            }
+                        //}
+                        //else
+                        //{
+                        //    ViewBag.ErroresExcel = "El usuario " + contador + " tiene uno o más campos incorrectos";
+                        //}
                     }
                     ViewBag.MensajeCorrecto = "La inserción se hizo correctamente";
                     ViewBag.ErroresExcel = new List<object>();

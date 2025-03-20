@@ -208,67 +208,67 @@ namespace BL
 
                 if (usuario.Nombre.Length > 50 || usuario.Nombre == "" || usuario.Nombre == null)
                 {
-                    resultValidacion.ErrorMessage += "El nombre del registro " + contador + " es muy largo o está vacío";
+                    resultValidacion.ErrorMessage += "El nombre del registro " + contador + " es muy largo o está vacío \n";
                 }
                 if (usuario.ApellidoPaterno.Length > 50 || usuario.ApellidoPaterno == "" || usuario.ApellidoPaterno == null)
                 {
-                    resultValidacion.ErrorMessage += "El apellido paterno del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El apellido paterno del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.ApellidoMaterno.Length > 50)
                 {
-                    resultValidacion.ErrorMessage += "El apellido materno del registro " + contador + " es muy largo";
+                    resultValidacion.ErrorMessage += "El apellido materno del registro " + contador + " es muy largo \n";
                 }
                 if (usuario.Celular.Length > 20 || usuario.Celular == "" || usuario.Celular == null)
                 {
-                    resultValidacion.ErrorMessage += "El celular  del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El celular  del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.UserName.Length > 50 || usuario.UserName == "" || usuario.UserName == null)
                 {
-                    resultValidacion.ErrorMessage += "El Username del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El Username del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.Email.Length > 254 || usuario.Email == "" || usuario.Email == null)
                 {
-                    resultValidacion.ErrorMessage += "El email del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El email del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.Password.Length > 50 || usuario.Password == "" || usuario.Password == null)
                 {
-                    resultValidacion.ErrorMessage += "La contraseña del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "La contraseña del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.FechaNacimiento == "" || usuario.FechaNacimiento == null)
                 {
-                    resultValidacion.ErrorMessage += "La fecha de nacimiento  del registro " + contador + "está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "La fecha de nacimiento  del registro " + contador + "está vacio o es muy largo \n";
                 }
                 if (usuario.Sexo.Length > 2 || usuario.Sexo == "" || usuario.Sexo == null)
                 {
-                    resultValidacion.ErrorMessage += "El sexo del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El sexo del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.Telefono.Length > 20 || usuario.Telefono == "" || usuario.Telefono == null)
                 {
-                    resultValidacion.ErrorMessage += "El telefono del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El telefono del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.CURP.Length > 50 || usuario.CURP == "" || usuario.CURP == null)
                 {
-                    resultValidacion.ErrorMessage += "El CURP del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El CURP del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.Rol.IdRol == 0 || usuario.Rol.IdRol > 6)
                 {
-                    resultValidacion.ErrorMessage += "El Id rol del registro " + contador + " está vacio o no existe";
+                    resultValidacion.ErrorMessage += "El Id rol del registro " + contador + " está vacio o no existe \n";
                 }
                 if (usuario.Direccion.Calle.Length > 50 || usuario.Direccion.Calle == "" || usuario.Direccion.Calle == null)
                 {
-                    resultValidacion.ErrorMessage += "La calle del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "La calle del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.Direccion.NumeroInterior.Length > 20)
                 {
-                    resultValidacion.ErrorMessage += "El número interior del registro " + contador + " es muy largo";
+                    resultValidacion.ErrorMessage += "El número interior del registro " + contador + " es muy largo \n";
                 }
                 if (usuario.Direccion.NumeroExterior.Length > 20 || usuario.Direccion.NumeroExterior == "" || usuario.Direccion.NumeroExterior == null)
                 {
-                    resultValidacion.ErrorMessage += "El número exterior del registro " + contador + " está vacio o es muy largo";
+                    resultValidacion.ErrorMessage += "El número exterior del registro " + contador + " está vacio o es muy largo \n";
                 }
                 if (usuario.Direccion.Colonia.IdColonia == 0 || usuario.Direccion.Colonia.IdColonia > 3598)
                 {
-                    resultValidacion.ErrorMessage += "El Id colonia del registro " + contador + " está vacío o no existe";
+                    resultValidacion.ErrorMessage += "El Id colonia del registro " + contador + " está vacío o no existe \n";
                 }
 
                 if (resultValidacion.ErrorMessage != null || resultValidacion.ErrorMessage == "")
@@ -595,7 +595,7 @@ namespace BL
             {
                 using (DL_EF.LGarciaProgramacionNCapasEntities context = new DL_EF.LGarciaProgramacionNCapasEntities())
                 {
-                    int filasAfectadas = context.UsuarioDireccionAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.Estatus, usuario.CURP.ToUpper(), usuario.Imagen, usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
+                    int filasAfectadas = context.UsuarioDireccionAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.CURP.ToUpper(), usuario.Imagen, usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
                     if (filasAfectadas > 0)
                     {
                         result.Correct = true;
