@@ -716,7 +716,7 @@ namespace BL
                             usuario.Telefono = obj.Telefono;
                             usuario.Estatus = obj.Estatus;
                             usuario.CURP = obj.CURP.ToUpper();
-                            usuario.Imagen = obj.Imagen;
+                            usuario.ImagenBase64 = usuario.Imagen == null ? "" :Convert.ToBase64String(obj.Imagen);
                             usuario.Rol.Nombre = obj.NombreRol;
                             if (obj.IdRol != null)
                             {

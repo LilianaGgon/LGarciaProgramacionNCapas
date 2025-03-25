@@ -74,6 +74,7 @@ namespace ML
 
         [DisplayName("Imagen")]
         public byte[] Imagen { get; set; }
+        public string ImagenBase64 { get; set; }
 
         public ML.Rol Rol { get; set; } //Propiedad de navegacion
         public List<object> Usuarios { get; set; } //Propiedad que se va a retornar en la vista del MVC
