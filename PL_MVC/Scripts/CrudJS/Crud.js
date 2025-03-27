@@ -3,13 +3,11 @@
 })
 
 function Formulario() {
+    LimpiarForm()
     DDLRol();
     DDLEstado();
     DDLMunicipio()
     DDLColonia()
-    mostrarModal();
-
-
 }
 
 function GetAll() {
@@ -69,7 +67,6 @@ function GetAll() {
 }
 
 function mostrarModal() {
-    LimpiarForm()
     $('#modalForm').modal('show')
 }
 
@@ -158,7 +155,7 @@ function GetById(IdUsuario) {
             if (result.Correct) {
                 var usuario = result.Object;
                 console.log(usuario)
-
+                Formulario()
                 $("#inptNombre").val(usuario.Nombre);
                 $("#inptApellidoPaterno").val(usuario.ApellidoPaterno);
                 $("#inptApellidoMaterno").val(usuario.ApellidoMaterno);
@@ -171,7 +168,8 @@ function GetById(IdUsuario) {
                 $("#inptTelefono").val(usuario.Telefono);
                 $("#inptCurp").val(usuario.CURP);
                 $("#inptImagen").val(usuario.ImagenBase64);
-                $("#ddlRol").val(usuario.Rol.Nombre);
+                let ddlRol = toString(`${usuario.Rol.IdRol}`)
+                $('#ddlRol').val(`'${ddlRol}'`)
                 $("#inptCalle").val(usuario.Direccion.Calle);
                 $("#inptNumeroInterior").val(usuario.Direccion.NumeroInterior);
                 $("#inptNumeroExterior").val(usuario.Direccion.NumeroExterior);
@@ -194,13 +192,12 @@ function GetById(IdUsuario) {
 function LimpiarForm() {
     $('input').each(function () {
         let inpt = $(this)
-        inpt.empty()
+        inpt.val("")
     })
 
     $('select').each(function () {
         let slct = $(this)
-        let optDefault = `<option value=0>Selecciona una opción</option>`
-        slct.append(optDefault)
+        slct.val("0")
     })
 }
 
@@ -212,6 +209,9 @@ function DDLRol() {
         success: function (result) {
             let ddlRol = $('#ddlRol')
             if (result.Correct) {
+                ddlRol.empty()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlRol.append(optDefault)
                 $.each(result.Objects, function (i, valor) {
                     var rol = `<option value=${valor.IdRol}>${valor.Nombre}</option>`;
                     ddlRol.append(rol);

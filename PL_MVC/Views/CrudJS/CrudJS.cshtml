@@ -10,7 +10,8 @@
 <div class="container">
     <div class="row">
         <div class="row">
-            <button type="button" class="btn btn-primary" data-bs-target="#staticBackdrop" onclick="Formulario(IdUsuario=0)">
+            <button type="button" class="btn btn-primary" data-bs-target="#staticBackdrop" onclick="Formulario(IdUsuario=0), 
+    mostrarModal()">
                 Agregar
             </button>
         </div>
@@ -104,10 +105,9 @@
                     <span class="input-group-text" id="basic-addon1">CURP</span>
                     <input type="text" class="form-control" name="CURP" placeholder="CURP" aria-label="CURP" aria-describedby="basic-addon1" id="inptCurp">
                 </div>
-                <div class="input-group mb-3">
+                <div class="mb-3">
                     <span class="input-group-text" id="basic-addon1">Rol</span>
                     <select id="ddlRol">
-                        <option value=0>Selecciona un rol</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
@@ -128,22 +128,19 @@
                     <span class="input-group-text" id="basic-addon1">Numero exterior</span>
                     <input type="text" class="form-control" name="NumeroExterior" placeholder="Numero interior" aria-label="Numero interior" aria-describedby="basic-addon1" id="inptNumeroExterior">
                 </div>
-                <div class="input-group mb-3">
+                <div class="mb-3">
                     <span class="input-group-text" id="basic-addon1">Estado</span>
                     <select id="ddlEstado" onchange="DDLMunicipio()">
-                        <option value=0>Selecciona un estado</option>
                     </select>
                 </div>
-                <div class="input-group mb-3">
+                <div class="mb-3">
                     <span class="input-group-text" id="basic-addon1">Municipio</span>
                     <select id="ddlMunicipio" onchange="DDLColonia()">
-                        <option value=0>Selecciona un municipio</option>
                     </select>
                 </div>
-                <div class="input-group mb-3">
+                <div class="mb-3">
                     <span class="input-group-text" id="basic-addon1">Colonia</span>
                     <select id="ddlColonia">
-                        <option value=0>Selecciona una colonia</option>
                     </select>
                 </div>
             </div>

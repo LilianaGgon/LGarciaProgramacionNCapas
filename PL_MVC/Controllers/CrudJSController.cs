@@ -57,21 +57,21 @@ namespace PL_MVC.Controllers
 
             ML.Result JsonResult = BL.Usuario.GetByIdEF(idUsuario);
 
-            //if (JsonResult.Correct)
-            //{
-            //    ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio); 
-            //    usuario.Direccion.Colonia.Colonias = resultColonia.Objects;
+            if (JsonResult.Correct)
+            {
+                ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
+                usuario.Direccion.Colonia.Colonias = resultColonia.Objects;
 
-            //    ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado); 
-            //    usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipio.Objects;
+                ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
+                usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipio.Objects;
 
-            //    ML.Result resultRol = BL.Rol.GetAll();
-            //    usuario.Rol.Roles = resultRol.Objects;
+                ML.Result resultRol = BL.Rol.GetAll();
+                usuario.Rol.Roles = resultRol.Objects;
 
-            //    ML.Result resultEstado = BL.Estado.GetAll(); 
-            //    usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstado.Objects;
+                ML.Result resultEstado = BL.Estado.GetAll();
+                usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstado.Objects;
 
-            //}
+            }
 
             return Json(JsonResult, JsonRequestBehavior.AllowGet);
         }
