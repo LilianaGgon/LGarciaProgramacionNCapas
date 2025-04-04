@@ -79,87 +79,6 @@ namespace DL_EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ColoniaGetAll");
         }
     
-        public virtual int UsuarioDireccioUpdate(Nullable<int> idUsuario, string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, Nullable<bool> estatus, string cURP, byte[] imagen, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
-        {
-            var idUsuarioParameter = idUsuario.HasValue ?
-                new ObjectParameter("IdUsuario", idUsuario) :
-                new ObjectParameter("IdUsuario", typeof(int));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var apellidoPaternoParameter = apellidoPaterno != null ?
-                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
-                new ObjectParameter("ApellidoPaterno", typeof(string));
-    
-            var apellidoMaternoParameter = apellidoMaterno != null ?
-                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
-                new ObjectParameter("ApellidoMaterno", typeof(string));
-    
-            var celularParameter = celular != null ?
-                new ObjectParameter("Celular", celular) :
-                new ObjectParameter("Celular", typeof(string));
-    
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
-                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
-                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
-    
-            var sexoParameter = sexo != null ?
-                new ObjectParameter("Sexo", sexo) :
-                new ObjectParameter("Sexo", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var estatusParameter = estatus.HasValue ?
-                new ObjectParameter("Estatus", estatus) :
-                new ObjectParameter("Estatus", typeof(bool));
-    
-            var cURPParameter = cURP != null ?
-                new ObjectParameter("CURP", cURP) :
-                new ObjectParameter("CURP", typeof(string));
-    
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
-    
-            var idRolParameter = idRol.HasValue ?
-                new ObjectParameter("IdRol", idRol) :
-                new ObjectParameter("IdRol", typeof(int));
-    
-            var calleParameter = calle != null ?
-                new ObjectParameter("Calle", calle) :
-                new ObjectParameter("Calle", typeof(string));
-    
-            var numeroInteriorParameter = numeroInterior != null ?
-                new ObjectParameter("NumeroInterior", numeroInterior) :
-                new ObjectParameter("NumeroInterior", typeof(string));
-    
-            var numeroExteriorParameter = numeroExterior != null ?
-                new ObjectParameter("NumeroExterior", numeroExterior) :
-                new ObjectParameter("NumeroExterior", typeof(string));
-    
-            var idColoniaParameter = idColonia.HasValue ?
-                new ObjectParameter("IdColonia", idColonia) :
-                new ObjectParameter("IdColonia", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccioUpdate", idUsuarioParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, estatusParameter, cURPParameter, imagenParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
-        }
-    
         public virtual ObjectResult<UsuarioGetAllBusquedaAbierta_Result> UsuarioGetAllBusquedaAbierta(string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<int> idRol)
         {
             var nombreParameter = nombre != null ?
@@ -225,7 +144,7 @@ namespace DL_EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetAllViewBusquedaAbierta_Result>("UsuarioGetAllViewBusquedaAbierta", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, idRolParameter);
         }
     
-        public virtual int UsuarioDireccionAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, string cURP, byte[] imagen, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
+        public virtual int UsuarioDireccionAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, string cURP, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -271,9 +190,82 @@ namespace DL_EF
                 new ObjectParameter("CURP", cURP) :
                 new ObjectParameter("CURP", typeof(string));
     
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
+    
+            var calleParameter = calle != null ?
+                new ObjectParameter("Calle", calle) :
+                new ObjectParameter("Calle", typeof(string));
+    
+            var numeroInteriorParameter = numeroInterior != null ?
+                new ObjectParameter("NumeroInterior", numeroInterior) :
+                new ObjectParameter("NumeroInterior", typeof(string));
+    
+            var numeroExteriorParameter = numeroExterior != null ?
+                new ObjectParameter("NumeroExterior", numeroExterior) :
+                new ObjectParameter("NumeroExterior", typeof(string));
+    
+            var idColoniaParameter = idColonia.HasValue ?
+                new ObjectParameter("IdColonia", idColonia) :
+                new ObjectParameter("IdColonia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccionAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, cURPParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
+        }
+    
+        public virtual int UsuarioDireccioUpdate(Nullable<int> idUsuario, string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, Nullable<bool> estatus, string cURP, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var celularParameter = celular != null ?
+                new ObjectParameter("Celular", celular) :
+                new ObjectParameter("Celular", typeof(string));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            var cURPParameter = cURP != null ?
+                new ObjectParameter("CURP", cURP) :
+                new ObjectParameter("CURP", typeof(string));
     
             var idRolParameter = idRol.HasValue ?
                 new ObjectParameter("IdRol", idRol) :
@@ -295,7 +287,7 @@ namespace DL_EF
                 new ObjectParameter("IdColonia", idColonia) :
                 new ObjectParameter("IdColonia", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccionAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, cURPParameter, imagenParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccioUpdate", idUsuarioParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, estatusParameter, cURPParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
         }
     }
 }

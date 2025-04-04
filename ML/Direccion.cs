@@ -14,16 +14,16 @@ namespace ML
 
         [DisplayName("Calle")]
         [Required(ErrorMessage = "La calle es obligatoria")]
-        [RegularExpression(@"[aA-zZ0-9]{1,50}")]
+        [RegularExpression(@"[a-z A-Z 0-9]{1,50}", ErrorMessage = "Solo se aceptan letras y números. \nNo puede contener más de 50 caracteres")]
         public string Calle { get; set; }
 
         [DisplayName("Numero interior")]
-        [RegularExpression(@"/[aA-zZ0-9]{1-20}/")]
+        [RegularExpression(@"[a-z A-Z 0-9]{1,20}", ErrorMessage = "Solo se aceptan letras y números. \nNo puede contener más de 20 caracteres")]
         public string NumeroInterior { get; set; }
 
         [DisplayName("Numero exterior")]
-        [Required(ErrorMessage = "El numero exterior es obligatorio")]
-        [RegularExpression(@"/[aA-zZ0-9]{1-20}/")]
+        [Required(ErrorMessage = "El numero exterior es obligatorio" )]
+        [RegularExpression(@"[a-z A-Z 0-9]{1,20}", ErrorMessage = "Solo se aceptan letras y números. \nNo puede contener más de 20 caracteres")]
         public string NumeroExterior { get; set; }
 
         public ML.Colonia Colonia { get; set; }

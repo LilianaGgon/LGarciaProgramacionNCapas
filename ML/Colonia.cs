@@ -11,8 +11,7 @@ namespace ML
     public class Colonia
     {
         [DisplayName("Id de la colonia")]
-        [Required(ErrorMessage = "El Id de la colonia es obligatorio")]
-        [RegularExpression(@"[1-3598]")]
+        [Required(ErrorMessage = "La colonia es obligatoria")]
         public int IdColonia { get; set; }
         public string Nombre { get; set; }
         public string CodigoPostal { get; set; }

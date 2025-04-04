@@ -595,7 +595,7 @@ namespace BL
             {
                 using (DL_EF.LGarciaProgramacionNCapasEntities context = new DL_EF.LGarciaProgramacionNCapasEntities())
                 {
-                    int filasAfectadas = context.UsuarioDireccionAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.CURP.ToUpper(), usuario.Imagen, usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
+                    int filasAfectadas = context.UsuarioDireccionAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.CURP.ToUpper(), /*usuario.Imagen /*SOLO PARA EF ,*/ usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
                     if (filasAfectadas > 0)
                     {
                         result.Correct = true;
@@ -627,7 +627,7 @@ namespace BL
             {
                 using (DL_EF.LGarciaProgramacionNCapasEntities context = new DL_EF.LGarciaProgramacionNCapasEntities())
                 {
-                    int filasAfectadas = context.UsuarioDireccioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.Estatus, usuario.CURP.ToUpper(), usuario.Imagen, usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
+                    int filasAfectadas = context.UsuarioDireccioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.Estatus, usuario.CURP.ToUpper(), /*usuario.Imagen //SOLO PARA EF, */ usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
                     if (filasAfectadas > 0)
                     {
                         result.Correct = true;
@@ -716,7 +716,7 @@ namespace BL
                             usuario.Telefono = obj.Telefono;
                             usuario.Estatus = obj.Estatus;
                             usuario.CURP = obj.CURP.ToUpper();
-                            usuario.Imagen = obj.Imagen;
+                            //usuario.Imagen = obj.Imagen;  //Solo para EF
                             usuario.Rol.Nombre = obj.NombreRol;
                             if (obj.IdRol != null)
                             {
@@ -789,7 +789,7 @@ namespace BL
                         usuario.Telefono = query.Telefono;
                         usuario.Estatus = query.Estatus;
                         usuario.CURP = query.CURP.ToUpper();
-                        usuario.Imagen = query.Imagen;
+                        //usuario.Imagen = query.Imagen;    //Solo para EF
                         if (query.IdRol != null)
                         {
                             usuario.Rol.IdRol = query.IdRol.Value;

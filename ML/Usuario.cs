@@ -38,7 +38,7 @@ namespace ML
 
         [DisplayName("Email")]
         [Required(ErrorMessage = "El email es obligatorio")]
-        [RegularExpression(@"^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$", ErrorMessage = "ejemplo1@email.com " +
+        [RegularExpression(@"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$", ErrorMessage = "ejemplo@email.com " +
             "No puede contener más de 50 caracteres")]
         public string Email { get; set; }
 
@@ -49,7 +49,7 @@ namespace ML
 
         [DisplayName("Fecha de nacimiento")]
         [Required(ErrorMessage = "La fecha de nacimiento es obligatoria")]
-        [RegularExpression(@"(19[0-9]{2}|2[0-9]{3})/(0[1-9]|1[012])/([123]0|[012][1-9]|31)", ErrorMessage = "El formato de la fecha de nacimiento es aaaa/mm/dd")]
+        [RegularExpression(@"(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)", ErrorMessage = "El formato de la fecha de nacimiento es aaaa-mm-dd")]
         public string FechaNacimiento { get; set; }
 
         [DisplayName("Sexo")]
@@ -59,7 +59,7 @@ namespace ML
 
         [DisplayName("Telefono")]
         [Required(ErrorMessage = "El telefono es obligatorio")]
-        [RegularExpression(@"^(0-9){1,20}$", ErrorMessage = "Solo se aceptan numeros" +
+        [RegularExpression(@"[0-9]{1,20}", ErrorMessage = "Solo se aceptan numeros" +
             "No puede contener más de 50 caracteres")]
         public string Telefono { get; set; }
 

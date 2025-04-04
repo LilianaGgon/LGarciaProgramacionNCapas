@@ -62,7 +62,8 @@ function ValidacionEmail(evt) {
     var ErrorMessage = inputField.parentNode.querySelector('.errorEmail')
     ErrorMessage.textContent = ''
     var entrada = inputField.value
-    if (!(/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(entrada))) {
+        
+    if (!(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(entrada))) {
         evt.preventDefault()
         inputField.style.borderColor = 'red'
         ErrorMessage.textContent = 'ejemplo@email.com'
@@ -137,6 +138,7 @@ function ConfirmacionPassword(evt) {
         $('.errorCoincidenciaPassword').html('Las contraseñas no coinciden');
     } else {
         document.getElementById("inptConfirmacionPassword").style.borderColor = "green"
+        $('.errorCoincidenciaPassword').html('Las contraseñas coinciden');
 
     }
 }
@@ -147,8 +149,8 @@ function validarFormulario(evt) {
     $(".inputObligatorio").each(function () {
         let input = $(this);
         let valor = input.val().trim()
-        let p = input.siblings('p');
-        //let p = $(".errorMensaje")
+        //let p = input.siblings('p');
+        let p = $(".errorMensaje")
 
         if (valor === "") {
             isValid = false;
@@ -159,7 +161,7 @@ function validarFormulario(evt) {
             p.text("").css("color", "green");
         }
     });
-
+    console.log(isValid)
     if (!isValid) {
         evt.preventDefault();
     }

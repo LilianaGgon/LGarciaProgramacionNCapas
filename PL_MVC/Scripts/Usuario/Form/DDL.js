@@ -10,7 +10,12 @@
             //console.log(result) //Imprime en consola lo que trae el result
             if (result.Correct) {
                 let ddlMunicipio = $('#ddlMunicipio') //Busca el ddl donde se van a pintar los valores
-
+                let ddlColonia = $('#ddlColonia')
+                ddlMunicipio.empty()
+                ddlColonia.empty()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlMunicipio.append(optDefault)
+                ddlColonia.append(optDefault)
                 $.each(result.Objects, function (i, valor) { //Foreach. por cada valor en el result.objects se ejecuta una funcion. i es el index, nos da la posicion en la que se encuentra, es un iterados y siempre va ahi, valor es lo que queremos objeter del objects
                     //let option = "<option value=" + valor.IdMunicipio + ">" + valor.Nombre + "</option>" //Concatenacion normal
                     let option = `<option value = ${valor.IdMunicipio}>${valor.Nombre}</option>`; //Concatenacion con backticks
@@ -36,7 +41,9 @@ function ColoniaGetByIdMunicipio() {
             //console.log(result)
             if (result.Correct) {
                 let ddlColonia = $('#ddlColonia')
-
+                ddlColonia.empty()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlColonia.append(optDefault)
                 $.each(result.Objects, function (i, valor) {
                     let option = `<option value = ${valor.IdColonia}>${valor.Nombre}</option>`;
                     ddlColonia.append(option)

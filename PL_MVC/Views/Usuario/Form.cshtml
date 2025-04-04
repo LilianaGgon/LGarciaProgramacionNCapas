@@ -62,7 +62,7 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 <p class="errorPassword mensajeError"></p>
                 @Html.Label("Confirmar Password", new { @class = "form-label" })
-                <input type="text" class="form-control inputObligatorio" onblur="ConfirmacionPassword(event)" id="inptConfirmacionPassword" />
+                <input type="text" class="form-control inputObligatorio" onblur="ConfirmacionPassword()" id="inptConfirmacionPassword" />
                 <p class="errorCoincidenciaPassword mensajeError"></p>
             </div>
             <div class="col">
