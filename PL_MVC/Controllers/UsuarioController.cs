@@ -162,7 +162,7 @@ namespace PL_MVC.Controllers
                     client.BaseAddress = new Uri(inicioEndpoint);
 
                     //HTTP POST
-                    var respuesta = client.PostAsJsonAsync<ML.Usuario>("Update/{idUsuario}", usuario);
+                    var respuesta = client.PutAsJsonAsync<ML.Usuario>("Update/"+usuario.IdUsuario, usuario);
                     respuesta.Wait();
 
                     var resultRespuesta = respuesta.Result;
@@ -183,42 +183,6 @@ namespace PL_MVC.Controllers
 
             return result;
         }
-
-        [HttpPost]
-        public ActionResult AddRest(ML.Usuario usuario)
-        {
-            ML.Result result = new ML.Result();
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    string inicioEndpoint = ConfigurationManager.AppSettings["CrudUsuarioEndPoint"].ToString();
-                    client.BaseAddress = new Uri(inicioEndpoint);
-
-                    //HTTP POST
-                    var respuesta = client.PostAsJsonAsync<ML.Usuario>("Add", usuario); //Serializar
-                    respuesta.Wait();
-
-                    var resultRespuesta = respuesta.Result;
-                    if (resultRespuesta.IsSuccessStatusCode)
-                    {
-                        //MODAL
-                        ViewBag.MensajeBLUsuario = "Se realizó la inserción correctamente";
-                        return PartialView("_ResultBLUsuario");
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                result.Correct = false;
-                result.ErrorMessage = ex.Message;
-                result.Ex = ex;
-            }
-
-            return View(usuario);
-        }
-
 
         
         [HttpGet] 
@@ -304,7 +268,7 @@ namespace PL_MVC.Controllers
                     string inicioEndpoint = ConfigurationManager.AppSettings["CrudUsuarioEndPoint"].ToString();
                     client.BaseAddress = new Uri(inicioEndpoint);
 
-                    var respuestaApi = client.GetAsync("Delete/" + idUsuario);
+                    var respuestaApi = client.DeleteAsync("Delete/" + idUsuario);
                     respuestaApi.Wait();
 
                     var resultApi = respuestaApi.Result;
@@ -326,14 +290,24 @@ namespace PL_MVC.Controllers
             }
             return result;
         }
-        [HttpDelete]
-        public ActionResult DeleteREST()
+
+        [HttpGet]
+        public ActionResult Delete(int idUsuario)
         {
-            DeleteREST();
+            ML.Result result = DeleteREST(idUsuario);
 
-
-
-            return View();
+            if (result.Correct)
+            {
+                ViewBag.Result = true;
+                ViewBag.MensajeBLUsuario = "Se eliminó correctamente";
+                return PartialView("_ResultBLUsuario");
+            }
+            else
+            {
+                ViewBag.Result = false;
+                ViewBag.MensajeBLUsuario = "ERROR al eliminar";
+                return PartialView("_ResultBLUsuario");
+            }
         }
 
 

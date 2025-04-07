@@ -31,18 +31,36 @@
 
                 @{
                     var mensajeBLUsuario = ViewBag.MensajeBLUsuario;
+                    var result = ViewBag.Result;
                 }
 
-                @if (mensajeBLUsuario != null)
+                @if (result)
                 {
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
-                        <div>
-                            @mensajeBLUsuario
+                    if (mensajeBLUsuario != null)
+                    {
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+                            <div>
+                                @mensajeBLUsuario
+                            </div>
                         </div>
-                    </div>
 
+                    }
                 }
+                else
+                {
+                    if (mensajeBLUsuario != null)
+                    {
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+                            <div>
+                                @mensajeBLUsuario
+                            </div>
+                        </div>
+
+                    }
+                }
+
 
 
             </div>
