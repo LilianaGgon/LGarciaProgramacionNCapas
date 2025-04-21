@@ -717,6 +717,7 @@ namespace BL
                             usuario.Estatus = obj.Estatus;
                             usuario.CURP = obj.CURP.ToUpper();
                             //usuario.Imagen = obj.Imagen;  //Solo para EF
+                            usuario.ImagenBase64 = usuario.Imagen == null ? "" : Convert.ToBase64String(obj.Imagen);
                             usuario.Rol.Nombre = obj.NombreRol;
                             if (obj.IdRol != null)
                             {
