@@ -232,6 +232,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CandidatoController.cs" />
     <Compile Include="Controllers\CrudJSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -298,6 +299,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Candidato\Validaciones.js" />
     <Content Include="Scripts\CrudJS\Crud.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -351,6 +353,8 @@
     <Content Include="Views\Usuario\_ErroresExcel.cshtml" />
     <Content Include="Views\Usuario\_ResultBLUsuario.cshtml" />
     <Content Include="Views\CrudJS\CrudJS.cshtml" />
+    <Content Include="Views\Candidato\Candidato.cshtml" />
+    <Content Include="Views\Candidato\FormCandidato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

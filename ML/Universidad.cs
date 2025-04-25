@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace ML
 {
-    public class Rol
+    public class Universidad
     {
-        [DisplayName("Rol")]
-        [Required(ErrorMessage = "El rol es obligatorio")]
-        public int IdRol { get; set; }
-
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        public int IdUniversidad { get; set; }
         public string Nombre { get; set; }
+        public List<object> Universidades { get; set; }
 
-        public List<object> Roles { get; set; }
 
     }
 }

@@ -1,0 +1,117 @@
+﻿@model ML.Candidato
+@{
+    ViewBag.Title = "Candidato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<h2>Candidatos</h2>
+
+<div class="container text-center">
+    @using (Html.BeginForm("Candidato", "Candidato", FormMethod.Post))
+    {
+        <div class="row justify-content-md-center">
+            <div class="col-3">
+                @Html.DropDownList("IdVacante", new SelectList(Model.Vacante.Vacantes, "IdVacante", "Nombre"), "Selecciona una vacante", new { @class = "form-select" })
+
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-success">
+                    Mostrar
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="container text-end">
+    <div class="row">
+        <div class="col">
+            <a href="@Url.Action("FormCandidato", "Candidato")" class="btn btn-primary">
+                <i class="bi bi-plus-square"></i> Agregar candidato
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    @if (Model.Candidatos.Count > 0)
+    {
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (ML.Candidato candidato in Model.Candidatos)
+            {
+                <div class="col">
+                    <div class="card h-80 rounded-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                        @if (candidato.Foto != null && candidato.Foto.Length > 0)
+                        {
+                            <div class="text-center">
+                                <img src="data:image/*;base64,@Convert.ToBase64String(candidato.Foto)" class="rounded-5 rounded-top-0" alt="..." height="200">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAd5avdba8EiOZH8lmV3XshrXx7dKRZvhx-A&s" class="rounded-5 rounded-top-0" alt="Foto candidato predeterminada" height="200">
+                            </div>
+                        }
+                        <div class="card-body">
+                            <div class="row align-content-center">
+                                <h5 class="card-title text-center">@candidato.Nombre @candidato.ApellidoPaterno @candidato.ApellidoMaterno</h5>
+                                <p class="card-text">@candidato.Edad años</p>
+                                <p class="card-text">@candidato.Carrera.Nombre, @candidato.Universidad.Nombre</p>
+                                <p class="card-text">Dirección: @candidato.Direccion</p>
+                                <p class="card-text">Correo: @candidato.Correo <br /> Telefono: @candidato.Telefono </p>
+                                <div class="row align-content-center">
+                                    @if (candidato.Curriculum != null && candidato.Curriculum.Length > 0)
+                                    {
+                                        <div class="col-8">
+                                            <a href="@Url.Action("DescargarCV", "Candidato", new { idCantidato = candidato.IdCandidato })" class="btn btn-info">
+                                                Descargar CV
+                                            </a>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="@Url.Action("FormCandidato", "Candidato", new { idCandidato = candidato.IdCandidato })" class="btn btn-warning">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="@Url.Action("Delete", "Candidato", new { idCandidato = candidato.IdCandidato })" class="btn btn-danger" onclick="return confirm('¿Eliminar candidato?')">
+                                                <i class="bi bi-x-square"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-8">
+                                            <button type="button" class="btn btn-info" disabled data-bs-toggle="button">No hay CV</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="@Url.Action("FormCandidato", "Candidato", new { idCandidato = candidato.IdCandidato })" class="btn btn-warning">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="@Url.Action("Delete", "Candidato", new { idCandidato = candidato.IdCandidato })" class="btn btn-danger" onclick="return confirm('¿Eliminar candidato?')">
+                                                <i class="bi bi-x-square"></i>
+                                            </a>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No hay nada para mostrar
+        </div>
+
+    }
+</div>

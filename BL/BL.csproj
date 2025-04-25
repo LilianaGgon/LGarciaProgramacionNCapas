@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BolsaTrabajo.cs" />
+    <Compile Include="Candidato.cs" />
+    <Compile Include="Carrera.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Colonia.cs" />
     <Compile Include="Direccion.cs" />
@@ -58,7 +61,9 @@
     <Compile Include="Municipio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="Universidad.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Vacante.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DL\DL.csproj">

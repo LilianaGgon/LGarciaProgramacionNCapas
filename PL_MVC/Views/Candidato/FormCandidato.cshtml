@@ -1,0 +1,163 @@
+﻿@model ML.Candidato
+@{
+    ViewBag.Title = "FormCandidato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Formulario</h2>
+
+<div class="container">
+    <div class="align-content-center">
+        @using (Html.BeginForm("FormCandidato", "Candidato", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(Model => Model.IdCandidato)
+            @Html.HiddenFor(Model => Model.Foto)
+            @Html.HiddenFor(Model => Model.Curriculum)
+
+            <div class="row align-content-center">
+                <h4>Datos personales</h4>
+                <div class="col-3 align-content-center">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control input", @onkeypress = "ValidacionLetras(event)" })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    <p class="errorLetras"></p>
+                </div>
+                <div class="col-3 align-content-center">
+                    @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control input", @onkeypress = "ValidacionLetras(event)" })
+                    @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                    <p class="errorLetras"></p>
+                </div>
+                <div class="col-3 align-content-center">
+                    @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control input", @onkeypress = "ValidacionLetras(event)" })
+                    @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                    <p class="errorLetras"></p>
+                </div>
+                <div class="col-3 align-content-center">
+                    @Html.LabelFor(model => model.Edad, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Edad, new { @class = "form-control input", @onkeypress = "ValidacionNumeros(event)" })
+                    @Html.ValidationMessageFor(model => model.Edad, "", new { @class = "text-danger" })
+                    <p class="errorNumeros"></p>
+                </div>
+            </div>
+            <hr />
+            <div class="row justify-content-center">
+                <h4>Contacto</h4>
+                <div class="col-3 justify-content-center">
+                    @Html.LabelFor(model => model.Direccion, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control input", @onkeypress = "ValidacionDireccion(event)" })
+                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                    <p class="errorDireccion"></p>
+                </div>
+                <div class="col-3 align-content-center">
+                    @Html.LabelFor(model => model.Correo, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Correo, new { @class = "form-control input", @onblur = "ValidacionCorreo(event)" })
+                    @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                    <p class="errorCorreo"></p>
+                </div>
+                <div class="col-3 align-content-center">
+                    @Html.LabelFor(model => model.Telefono, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control input", @onkeypress = "ValidacionNumeros(event)" })
+                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                    <p class="errorLetras"></p>
+                </div>
+            </div>
+            <hr />
+            <div class="row justify-content-center">
+                <h4>Estudios</h4>
+                <div class="col-3 align-items-center">
+                    @Html.Label("Universidad", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.Universidad.IdUniversidad, new SelectList(Model.Universidad.Universidades, "IdUniversidad", "Nombre"), "Selecciona una universidad", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Universidad.IdUniversidad, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-3 align-content-center">
+                    @Html.Label("Carrera", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.Carrera.IdCarrera, new SelectList(Model.Carrera.Carreras, "IdCarrera", "Nombre"), "Selecciona una carrera", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Carrera.IdCarrera, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            <div class="row justify-content-center">
+                <h4>Documentos</h4>
+                <div class="col-4 align-items-start">
+                    <div class="row">
+                        @Html.LabelFor(model => model.Foto, new { @class = "form-label" })
+                        @if (Model.Foto != null && Model.Foto.Length > 0)
+                        {
+                            <div class="col-7 align-items-center">
+                                <img src="data:image/*;base64,@Convert.ToBase64String(Model.Foto)" name="fotoCandidato" id="fotoCandidato" sizes="30%" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-7 align-items-center">
+                                <img src="https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg" name="fotoCandidato" id="fotoCandidato" alt="Foto candidato predeterminada" width="150" height="150">
+                                <p>No hay una foto guardada</p>
+                            </div>
+                        }
+                    </div>
+                    <div class="input-group">
+                        <input type="file" name="inptFoto" class="form-control" id="inptFoto" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onchange="ValidarImagen(), RemplazarImagen(this)">
+                    </div>
+                </div>
+
+                <div class="col-4 align-content-center">
+                    @Html.LabelFor(model => model.Curriculum, new { @class = "form-label" })
+                    @if (Model.Curriculum != null && Model.Curriculum.Length > 0)
+                    {
+                        <div class="col-7 align-items-center">
+                            <img id="imgCurriculum" name="imgCurriculum" src="https://cdn.pixabay.com/photo/2017/03/08/21/20/pdf-2127829_1280.png" alt="Si hay PDF" width="150" height="150" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-7 align-items-center">
+                            <img src="https://cdn-icons-png.freepik.com/512/8176/8176584.png" id="imgCurriculum" name="imgCurriculum" alt="No hay PDF" width="150" height="150">
+                            <p>No hay un CV guardado</p>
+                        </div>
+                    }
+                    <div class="input-group">
+                        <input type="file" name="inptCurriculum" class="form-control" id="inptCurriculum" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onchange="ValidarCurriculum()">
+                    </div>
+                </div>
+                @*<div class="col align-content-center">
+                        @Html.LabelFor(model => model.Curriculum, new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.Curriculum, new { @class = "form-control input" })
+                    </div>*@
+            </div>
+            <hr />
+            <div class="row justify-content-center">
+                <h4>Vacante</h4>
+                <div class="col-3 align-items-center">
+                    @Html.Label("Vacante", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.Vacante.IdVacante, new SelectList(Model.Vacante.Vacantes, "IdVacante", "Nombre"), "Selecciona una vacante", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Vacante.IdVacante, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-3 align-items-center">
+                    @Html.Label("Vacante", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.BolsaTrabajo.IdBolsaTrabajo, new SelectList(Model.BolsaTrabajo.BolsasTrabajo, "IdBolsaTrabajo", "Nombre"), "Selecciona una bolsa de trabajo", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.BolsaTrabajo.IdBolsaTrabajo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row justify-content-start">
+                <div class="col align-items-start">
+                    <button type="submit" class="btn btn-outline-primary">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script src="~/Scripts/Candidato/Validaciones.js"></script>
