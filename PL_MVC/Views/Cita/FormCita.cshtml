@@ -1,0 +1,109 @@
+﻿@model ML.Cita
+@{
+    ViewBag.Title = "FormCita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Formulario cita</h2>
+
+<div class="container">
+    <div class="row" style="margin: 15px">
+        <div class="col d-flex justify-content-end">
+            <button type="button" id="btnCitaPresencial" class="btn btn-dark" onclick="CitaPresencial()">Cita presencial</button>
+            <button type="button" id="btnCitaVirtual" class="btn btn-dark" onclick="CitaVirtual()">Cita virtual</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="row">
+                <div class="card border border-3" style="width: 25rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="row">
+                                @if (Model.Candidato.Foto != null && Model.Candidato.Foto.Length > 0)
+                                {
+                                    <div class="col d-flex justify-content-center">
+                                        <img src="data:image/*;base64,@Convert.ToBase64String(Model.Candidato.Foto)" class="rounded-5" alt="Foto del candidato" height="200" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col d-flex justify-content-center">
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAd5avdba8EiOZH8lmV3XshrXx7dKRZvhx-A&s" class="rounded-5" alt="Foto del candidato" height="200" />
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="text-dark text-center">@Model.Candidato.Nombre @Model.Candidato.ApellidoPaterno @Model.Candidato.ApellidoMaterno</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-center">@Model.Candidato.Correo</p>
+                                        <p class="text-center">@Model.Candidato.Telefono</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-center">@Model.Candidato.Vacante.Nombre</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col d-flex justify-content-center" id="formCita">
+            @using (Html.BeginForm("FormCita", "Cita", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.Candidato.IdCandidato)
+                @Html.HiddenFor(model => model.IdCita, new {@id = "idCitaHiddenFor"})
+                <div class="row">
+                    <div class="row">
+                            <span>Fecha y hora de la cita</span>
+                        <div class="col form-floating">
+                            @Html.TextBoxFor(model => model.FechaHora, new { @class = "form-control", @placeholder = "mm/dd/aaaa hh/mm AM/PM" })
+                            <label for="floatingInput" style="color: grey;">año-mes-dia hr:min</label>
+                        </div>
+                    </div>
+                    <div class="row" id="campoLugarCita">
+                        <div class="col" id="colDdlPiso">
+                            @Html.Label("Piso")
+                            @Html.DropDownListFor(model => model.Piso.IdPiso, new SelectList(Model.Piso.Pisos, "IdPiso", "Nombre"), "Selecciona un piso", new { @class = "form-select", @id = "ddlPiso" })
+                        </div>
+                        <div class="col" id="colInptUrl">
+                            @Html.Label("URL")
+                            @Html.TextBoxFor(model => model.Url, new { @class = "form-control", @id = "inptUrl" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @Html.Label("Estatus de la cita")
+                            @Html.DropDownListFor(model => model.EstatusCita.IdEstatusCita, new SelectList(Model.EstatusCita.EstatusCitas, "IdEstatusCita", "Nombre"), new { @class = "form-select", @id = "ddlEstatusCita" })
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 15px">
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-success">Guardar</button>
+                        </div>
+                        <div class="col-2">
+                            <a href="@Url.Action("Cita", "Cita")" class="btn btn-outline-danger">
+                                Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/Citas/Botones.js"></script>

@@ -74,6 +74,9 @@
     <Compile Include="CarreraGetAll_Result.cs">
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cita.cs">
+      <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Colonia.cs">
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
@@ -94,6 +97,9 @@
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="EstadoGetAll_Result.cs">
+      <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstatusCita.cs">
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="EstatusVacante.cs">
@@ -121,6 +127,9 @@
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="MunicipioGetByIdEstado_Result.cs">
+      <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Piso.cs">
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

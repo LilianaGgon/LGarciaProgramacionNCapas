@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ML
 {
-    public class EstatusVacante
+    public class Piso
     {
-        public byte IdEstatusVacante { get; set; }
+        public byte? IdPiso { get; set; }
         public string Nombre { get; set; }
-        public List<object> EstatusVacantes { get; set; }
+        public List<object> Pisos { get; set; }
 
     }
 }

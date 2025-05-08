@@ -31,8 +31,24 @@ namespace PL_MVC.Controllers
             ML.Candidato candidato = new ML.Candidato();
             candidato.Vacante = new ML.Vacante();
 
-            ML.Result result = BL.Candidato.GetAllBusqueda(IdVacante.Value);
-            candidato.Candidatos = result.Objects;
+            if (IdVacante != 0)
+            {
+
+                ML.Result result = BL.Candidato.GetAllBusqueda(IdVacante.Value);
+
+                if (result.Objects == null)
+                {
+                    candidato.Candidatos = new List<object>();
+                }
+                else
+                {
+                    candidato.Candidatos = result.Objects;
+                }
+            }
+            else
+            {
+                Candidato();
+            }
 
             ML.Result resultVacante = BL.Vacante.GetAll();
             candidato.Vacante.Vacantes = resultVacante.Objects;
@@ -98,7 +114,8 @@ namespace PL_MVC.Controllers
             if (foto.ContentLength <= 0)
             {
                 candidato.Foto = candidato.Foto;
-            } else
+            }
+            else
             {
                 candidato.Foto = ConvertirArrayBytes(foto);
             }
@@ -155,7 +172,8 @@ namespace PL_MVC.Controllers
             if (archivo != null && archivo.Length > 0)
             {
                 return File(archivo, System.Net.Mime.MediaTypeNames.Application.Octet, nombreCV);
-            } else
+            }
+            else
             {
                 return null;
             }

@@ -245,10 +245,14 @@ namespace PL_MVC.Controllers
                 if (result.Correct)
                 {
                     ViewBag.MensajeBLUsuario = "Se realizó la actualización correctamente";
+                    ViewBag.Result = true;
+
                     return PartialView("_ResultBLUsuario");
                 } else
                 {
                     ViewBag.MensajeBLUsuario = "ERROR en la actualización";
+                    ViewBag.Result = false;
+
                     return PartialView("_ResultBLUsuario");
                 }
                 

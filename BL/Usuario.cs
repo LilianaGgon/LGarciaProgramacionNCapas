@@ -716,7 +716,7 @@ namespace BL
                             usuario.Telefono = obj.Telefono;
                             usuario.Estatus = obj.Estatus;
                             usuario.CURP = obj.CURP.ToUpper();
-                            //usuario.Imagen = obj.Imagen;  //Solo para EF
+                            usuario.Imagen = obj.Imagen;  //Solo para EF
                             usuario.ImagenBase64 = usuario.Imagen == null ? "" : Convert.ToBase64String(obj.Imagen);
                             usuario.Rol.Nombre = obj.NombreRol;
                             if (obj.IdRol != null)
@@ -790,7 +790,7 @@ namespace BL
                         usuario.Telefono = query.Telefono;
                         usuario.Estatus = query.Estatus;
                         usuario.CURP = query.CURP.ToUpper();
-                        //usuario.Imagen = query.Imagen;    //Solo para EF
+                        usuario.Imagen = query.Imagen;    //Solo para EF
                         if (query.IdRol != null)
                         {
                             usuario.Rol.IdRol = query.IdRol.Value;

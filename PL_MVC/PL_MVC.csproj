@@ -233,6 +233,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CandidatoController.cs" />
+    <Compile Include="Controllers\CitaController.cs" />
     <Compile Include="Controllers\CrudJSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -300,6 +301,7 @@
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Candidato\Validaciones.js" />
+    <Content Include="Scripts\Citas\Botones.js" />
     <Content Include="Scripts\CrudJS\Crud.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -355,6 +357,8 @@
     <Content Include="Views\CrudJS\CrudJS.cshtml" />
     <Content Include="Views\Candidato\Candidato.cshtml" />
     <Content Include="Views\Candidato\FormCandidato.cshtml" />
+    <Content Include="Views\Cita\Cita.cshtml" />
+    <Content Include="Views\Cita\FormCita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

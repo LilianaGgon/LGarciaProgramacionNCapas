@@ -41,7 +41,7 @@ namespace BL
                             vacante.FechaPublicacion = Convert.ToString(objBD.FechaPublicacion);
                             vacante.FechaLimite = Convert.ToString(objBD.FechaLimite);
                             vacante.UrlVacante = objBD.UrlVacante;
-                            vacante.EstatusVacante.IdEstatusVacante = Convert.ToInt32(objBD.IdEstatusVacante);
+                            vacante.EstatusVacante.IdEstatusVacante = (byte)Convert.ToInt32(objBD.IdEstatusVacante);
 
                             result.Objects.Add(vacante);
                         }

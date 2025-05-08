@@ -1,0 +1,99 @@
+﻿@model ML.Cita
+@{
+    ViewBag.Title = "Cita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cita</h2>
+
+<div class="container text-center">
+    @using (Html.BeginForm("Cita", "Cita", FormMethod.Post))
+    {
+        <div class="row justify-content-center">
+            <div class="col-3">
+                @Html.DropDownList("IdVacante", new SelectList(Model.Candidato.Vacante.Vacantes, "IdVacante", "Nombre"), "Selecciona una vacante", new { @class = "form-select" })
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-success">
+                    Mostrar citas
+                </button>
+            </div>
+        </div>
+    }
+
+    @if (Model.Citas.Count > 0)
+    {
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Vacante</th>
+                            <th scope="col">Cita</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.Cita cita in Model.Citas)
+                        {
+                            <tr>
+                                <td>
+                                    @if (cita.Candidato.Foto != null && cita.Candidato.Foto.Length > 0)
+                                    {
+                                        <div class="text-center">
+                                            <img src="data:image/*;base64,@Convert.ToBase64String(cita.Candidato.Foto)" class="rounded-5" alt="Foto candidato" height="120">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAd5avdba8EiOZH8lmV3XshrXx7dKRZvhx-A&s" class="rounded-5" alt="Foto candidato predeterminada" height="120">
+                                        </div>
+                                    }
+                                </td>
+                                <td>@cita.Candidato.Nombre @cita.Candidato.ApellidoPaterno @cita.Candidato.ApellidoMaterno</td>
+                                <td>@cita.Candidato.Edad</td>
+                                <td>@cita.Candidato.Correo <br />@cita.Candidato.Telefono</td>
+                                <td>@cita.Candidato.Vacante.Nombre</td>
+                                <td>
+                                    @if (cita.IdCita == 0)
+                                    {
+                                        <a href="@Url.Action("FormCita", "Cita", new {idCandidato = cita.Candidato.IdCandidato})" class="btn btn-primary">
+                                            Agendar
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("FormCita", "Cita", new {idCandidato = cita.Candidato.IdCandidato})" class="btn btn-warning">
+                                            Editar
+                                        </a>
+                                    }
+                                    
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Delete", "Cita", new {idCita = cita.IdCita})" class="btn btn-danger" onclick="return confirm('¿Eliminar cita')">
+                                        Eliminar
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No hay información para mostrar
+        </div>
+    }
+</div>
+
