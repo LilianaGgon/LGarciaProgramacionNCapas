@@ -109,7 +109,10 @@ namespace PL_MVC.Controllers
 
             // Manejo de imagen
             HttpPostedFileBase file = Request.Files["Imagen"];
-            if (file != null)
+            if (file == null && file.ContentLength > 0)
+            {
+                usuario.Imagen = usuario.Imagen;
+            } else
             {
                 usuario.Imagen = ConvertirArrayBytes(file);
             }

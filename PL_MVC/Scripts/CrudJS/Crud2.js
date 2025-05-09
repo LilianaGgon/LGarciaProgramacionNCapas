@@ -86,7 +86,7 @@ function Guardar() {
         type: 'POST',
         dataType: 'json',
         data: {
-            IdUsuario : 0,
+            IdUsuario: 0,
             Nombre: $("#inptNombre").val(),
             ApellidoPaterno: $("#inptApellidoPaterno").val(),
             ApellidoMaterno: $("#inptApellidoMaterno").val(),
@@ -157,16 +157,16 @@ function Delete(IdUsuario) {
 
 
 function LimpiarForm() {
-//    $('input').each(function () {
-//        let inpt = $(this)
-//        inpt.val("")
-//    })
+    $('input').each(function () {
+        let inpt = $(this)
+        inpt.val("")
+    })
 
-//    $('select').each(function () {
-//        let slct = $(this)
-//        slct.val("")
-//    })
-//}
+    $('select').each(function () {
+        let slct = $(this)
+        slct.val("")
+    })
+}
 
 
 
@@ -242,112 +242,112 @@ function LimpiarForm() {
 
 
 
-//function DDLRol(callback) {
-//    $.ajax({
-//        url: urlDDLRol,
-//        type: 'GET',
-//        dataType: 'JSON',
-//        success: function (result) {
-//            let ddlRol = $('#ddlRol')
-//            if (result.Correct) {
-//                ddlRol.empty()
-//                let optDefault = `<option value=0>Selecciona una opción</option>`
-//                ddlRol.append(optDefault)
-//                $.each(result.Objects, function (i, valor) {
-//                    var rol = `<option value=${valor.IdRol}>${valor.Nombre}</option>`;
-//                    ddlRol.append(rol);
-//                })
-//            }
-//        },
-//        error:
-//            function (xhr) {
-//                console.log(xhr)
-//            }
-//    })
-//}
-//function DDLEstado(callback) {
-//    $.ajax({
-//        url: urlDDLEstado,
-//        type: 'GET',
-//        dataType: 'JSON',
-//        success: function (result) {
-//            let ddlEstado = $('#ddlEstado')
-//            if (result.Correct) {
-//                let ddlMunicipio = $('#ddlMunicipio')
-//                let ddlColonia = $('#ddlColonia')
-//                ddlEstado.empty()
-//                ddlMunicipio.empty()
-//                ddlColonia.empty()
+function DDLRol(callback) {
+    $.ajax({
+        url: urlDDLRol,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (result) {
+            let ddlRol = $('#ddlRol')
+            if (result.Correct) {
+                ddlRol.empty()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlRol.append(optDefault)
+                $.each(result.Objects, function (i, valor) {
+                    var rol = `<option value=${valor.IdRol}>${valor.Nombre}</option>`;
+                    ddlRol.append(rol);
+                })
+            }
+        },
+        error:
+            function (xhr) {
+                console.log(xhr)
+            }
+    })
+}
+function DDLEstado(callback) {
+    $.ajax({
+        url: urlDDLEstado,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (result) {
+            let ddlEstado = $('#ddlEstado')
+            if (result.Correct) {
+                let ddlMunicipio = $('#ddlMunicipio')
+                let ddlColonia = $('#ddlColonia')
+                ddlEstado.empty()
+                ddlMunicipio.empty()
+                ddlColonia.empty()
 
-//                let optDefault = `<option value=0>Selecciona una opción</option>`
-//                ddlEstado.append(optDefault)
-//                ddlMunicipio.append(optDefault)
-//                ddlColonia.append(optDefault)
-//                $.each(result.Objects, function (i, valor) {
-//                    var estado = `<option value=${valor.IdEstado}>${valor.Nombre}</option>`;
-//                    ddlEstado.append(estado);
-//                })
-//            }
-//        },
-//        error:
-//            function (xhr) {
-//                console.log(xhr)
-//            }
-//    })
-//}
-//function DDLMunicipio(callback) {
-//    let urlMunicipio = urlDDLMunicipio + $('#ddlEstado').val()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlEstado.append(optDefault)
+                ddlMunicipio.append(optDefault)
+                ddlColonia.append(optDefault)
+                $.each(result.Objects, function (i, valor) {
+                    var estado = `<option value=${valor.IdEstado}>${valor.Nombre}</option>`;
+                    ddlEstado.append(estado);
+                })
+            }
+        },
+        error:
+            function (xhr) {
+                console.log(xhr)
+            }
+    })
+}
+function DDLMunicipio(callback) {
+    let urlMunicipio = urlDDLMunicipio + $('#ddlEstado').val()
 
-//    $.ajax({
-//        url: urlMunicipio,
-//        type: 'GET',
-//        dataType: 'JSON',
-//        success: function (result) {
-//            //console.log(result)
-//            let ddlMunicipio = $('#ddlMunicipio')
-//            ddlMunicipio.empty()
-//            if (result.Correct) {
-//                //console.log(result)
-//                ddlMunicipio.empty()
-//                let optDefault = `<option value=0>Selecciona una opción</option>`
-//                ddlMunicipio.append(optDefault)
-//                $.each(result.Objects, function (i, valor) {
-//                    var municipio = `<option value=${valor.IdMunicipio}>${valor.Nombre}</option>`;
-//                    ddlMunicipio.append(municipio);
-//                })
-//            }
-//        },
-//        error:
-//            function (xhr) {
-//                console.log(xhr)
-//            }
-//    })
-//}
-//function DDLColonia(callback) {
-//    let urlColonia = urlDDLColonia + $('#ddlMunicipio').val()
-//    $.ajax({
-//        url: urlColonia,
-//        type: 'GET',
-//        dataType: 'JSON',
-//        success: function (result) {
-//            let ddlColonia = $('#ddlColonia')
-//            if (result.Correct) {
-//                //console.log(result)
-//                ddlColonia.empty()
-//                let optDefault = `<option value=0>Selecciona una opción</option>`
-//                ddlColonia.append(optDefault)
-//                $.each(result.Objects, function (i, valor) {
-//                    var colonia = `<option value=${valor.IdColonia}>${valor.Nombre}</option>`;
-//                    ddlColonia.append(colonia);
-//                })
-//            }
-//        },
-//        error:
-//            function (xhr) {
-//                console.log(xhr)
-//            }
-//    })
-//}
+    $.ajax({
+        url: urlMunicipio,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (result) {
+            //console.log(result)
+            let ddlMunicipio = $('#ddlMunicipio')
+            ddlMunicipio.empty()
+            if (result.Correct) {
+                //console.log(result)
+                ddlMunicipio.empty()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlMunicipio.append(optDefault)
+                $.each(result.Objects, function (i, valor) {
+                    var municipio = `<option value=${valor.IdMunicipio}>${valor.Nombre}</option>`;
+                    ddlMunicipio.append(municipio);
+                })
+            }
+        },
+        error:
+            function (xhr) {
+                console.log(xhr)
+            }
+    })
+}
+function DDLColonia(callback) {
+    let urlColonia = urlDDLColonia + $('#ddlMunicipio').val()
+    $.ajax({
+        url: urlColonia,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (result) {
+            let ddlColonia = $('#ddlColonia')
+            if (result.Correct) {
+                //console.log(result)
+                ddlColonia.empty()
+                let optDefault = `<option value=0>Selecciona una opción</option>`
+                ddlColonia.append(optDefault)
+                $.each(result.Objects, function (i, valor) {
+                    var colonia = `<option value=${valor.IdColonia}>${valor.Nombre}</option>`;
+                    ddlColonia.append(colonia);
+                })
+            }
+        },
+        error:
+            function (xhr) {
+                console.log(xhr)
+            }
+    })
+}
 
 
 
@@ -425,141 +425,7 @@ function GetById(IdUsuario) {
 }
 
 
-function DDLRol(callback) {
-    $.ajax({
-        url: urlDDLRol,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function (result) {
-            let ddlRol = $('#ddlRol');
-            ddlRol.empty().append('<option value="0">Selecciona una opción</option>');
-            if (result.Correct) {
-                $.each(result.Objects, function (i, valor) {
-                    ddlRol.append(`<option value="${valor.IdRol}">${valor.Nombre}</option>`);
-                });
-                if (typeof callback === 'function') { // Asegurarse de que callback es una función
-                    console.log("DDLRol completado, ejecutando callback.");
-                    callback();
-                }
-            } else {
-                console.error("Error al cargar roles.");
-            }
-        },
-        error: function (xhr) {
-            console.log("Error en DDLRol:", xhr);
-        }
-    });
-}
 
-function DDLEstado(callback) {
-    $.ajax({
-        url: urlDDLEstado,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function (result) {
-            let ddlEstado = $('#ddlEstado');
-            let ddlMunicipio = $('#ddlMunicipio');
-            let ddlColonia = $('#ddlColonia');
-
-            ddlEstado.empty().append('<option value="0">Selecciona una opción</option>');
-            ddlMunicipio.empty().append('<option value="0">Selecciona una opción</option>');
-            ddlColonia.empty().append('<option value="0">Selecciona una opción</option>');
-
-            if (result.Correct) {
-                $.each(result.Objects, function (i, valor) {
-                    ddlEstado.append(`<option value="${valor.IdEstado}">${valor.Nombre}</option>`);
-                });
-                if (typeof callback === 'function') { // Asegurarse de que callback es una función
-                    console.log("DDLEstado completado, ejecutando callback.");
-                    callback();
-                }
-            } else {
-                console.error("Error al cargar estados.");
-            }
-        },
-        error: function (xhr) {
-            console.log("Error en DDLEstado:", xhr);
-        }
-    });
-}
-
-function DDLMunicipio(idEstado, callback) {
-    let urlMunicipio = urlDDLMunicipio + idEstado;
-    console.log("URL para municipios:", urlMunicipio);
-    $.ajax({
-        url: urlMunicipio,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function (result) {
-            let ddlMunicipio = $('#ddlMunicipio');
-            ddlMunicipio.empty().append('<option value="0">Selecciona una opción</option>');
-            if (result.Correct) {
-                $.each(result.Objects, function (i, valor) {
-                    ddlMunicipio.append(`<option value="${valor.IdMunicipio}">${valor.Nombre}</option>`);
-                });
-                if (typeof callback === 'function') { // Asegurarse de que callback es una función
-                    console.log("DDLMunicipio completado, ejecutando callback.");
-                    callback();
-                }
-            } else {
-                console.error("Error al cargar municipios para el estado:", idEstado);
-            }
-        },
-        error: function (xhr) {
-            console.log("Error en DDLMunicipio:", xhr);
-        }
-    });
-}
-
-function DDLColonia(idMunicipio, callback) {
-    let urlColonia = urlDDLColonia + idMunicipio;
-    console.log("URL para colonias:", urlColonia);
-    $.ajax({
-        url: urlColonia,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function (result) {
-            let ddlColonia = $('#ddlColonia');
-            ddlColonia.empty().append('<option value="0">Selecciona una opción</option>');
-            if (result.Correct) {
-                $.each(result.Objects, function (i, valor) {
-                    ddlColonia.append(`<option value="${valor.IdColonia}">${valor.Nombre}</option>`);
-                });
-                if (typeof callback === 'function') { // Asegurarse de que callback es una función
-                    console.log("DDLColonia completado, ejecutando callback.");
-                    callback();
-                }
-            } else {
-                console.error("Error al cargar colonias para el municipio:", idMunicipio);
-            }
-        },
-        error: function (xhr) {
-            console.log("Error en DDLColonia:", xhr);
-        }
-    });
-}
-
-$(document).ready(function () {
-    $('#ddlEstado').off('change').on('change', function () {
-        var idEstado = $(this).val();
-        if (idEstado > 0) {
-            DDLMunicipio(idEstado);
-            $('#ddlColonia').empty().append('<option value="0">Selecciona una opción</option>');
-        } else {
-            $('#ddlMunicipio').empty().append('<option value="0">Selecciona una opción</option>');
-            $('#ddlColonia').empty().append('<option value="0">Selecciona una opción</option>');
-        }
-    });
-
-    $('#ddlMunicipio').off('change').on('change', function () {
-        var idMunicipio = $(this).val();
-        if (idMunicipio > 0) {
-            DDLColonia(idMunicipio);
-        } else {
-            $('#ddlColonia').empty().append('<option value="0">Selecciona una opción</option>');
-        }
-    });
-});
 
 
 
