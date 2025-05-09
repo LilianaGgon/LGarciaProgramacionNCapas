@@ -379,6 +379,7 @@
           <Parameter Name="Sexo" Type="char" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
           <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
           <Parameter Name="Calle" Type="varchar" Mode="In" />
           <Parameter Name="NumeroInterior" Type="varchar" Mode="In" />
@@ -399,6 +400,7 @@
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
           <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
           <Parameter Name="Calle" Type="varchar" Mode="In" />
           <Parameter Name="NumeroInterior" Type="varchar" Mode="In" />
@@ -554,44 +556,6 @@
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UsuarioDireccionAdd">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Celular" Mode="In" Type="String" />
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="CURP" Mode="In" Type="String" />
-            <Parameter Name="IdRol" Mode="In" Type="Int32" />
-            <Parameter Name="Calle" Mode="In" Type="String" />
-            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
-            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
-            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UsuarioDireccioUpdate">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Celular" Mode="In" Type="String" />
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
-            <Parameter Name="CURP" Mode="In" Type="String" />
-            <Parameter Name="IdRol" Mode="In" Type="Int32" />
-            <Parameter Name="Calle" Mode="In" Type="String" />
-            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
-            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
-            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="BolsaTrabajoes" EntityType="LGarciaProgramacionNCapasModel.BolsaTrabajo" />
           <EntitySet Name="Candidatoes" EntityType="LGarciaProgramacionNCapasModel.Candidato" />
           <EntitySet Name="Carreras" EntityType="LGarciaProgramacionNCapasModel.Carrera" />
@@ -678,6 +642,46 @@
             <End Role="Piso" EntitySet="Pisoes" />
             <End Role="Cita" EntitySet="Citas" />
           </AssociationSet>
+          <FunctionImport Name="UsuarioDireccionAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Celular" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
+            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
+            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioDireccioUpdate">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Celular" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
+            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
+            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Rol">
           <Key>
@@ -1445,8 +1449,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UsuarioDireccionAdd" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccionAdd" />
-          <FunctionImportMapping FunctionImportName="UsuarioDireccioUpdate" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccioUpdate" />
           <EntitySetMapping Name="BolsaTrabajoes">
             <EntityTypeMapping TypeName="LGarciaProgramacionNCapasModel.BolsaTrabajo">
               <MappingFragment StoreEntitySet="BolsaTrabajo">
@@ -1651,6 +1653,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioDireccionAdd" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccionAdd" />
+          <FunctionImportMapping FunctionImportName="UsuarioDireccioUpdate" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccioUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
