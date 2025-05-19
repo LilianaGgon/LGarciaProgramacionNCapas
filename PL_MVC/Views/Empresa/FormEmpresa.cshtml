@@ -1,0 +1,138 @@
+﻿@model ML.Empresa
+@{
+    ViewBag.Title = "FormEmpresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Formulario</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col 4">
+            @using (Html.BeginForm("FormEmpresa", "Empresa", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.IdEmpresa)
+
+                <div class="row" style="margin:10px;">
+                    @Html.Label("Nombre de la empresa", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                </div>
+                @*<fieldset disabled>*@
+                    <div class="row" style="margin:10px;">
+                        @Html.Label("Latitud", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.Latitud, new { @class = "form-control", @id = "inptLatitud", @readonly = "readonly" })
+                    </div>
+                    <div class="row" style="margin:10px;">
+                        @Html.Label("Longitud", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.Longitud, new { @class = "form-control", @id = "inptLongitud", @readonly = true })
+                    </div>
+                @*</fieldset>*@
+
+                <div class="row justify-content-evenly" style="margin:10px;">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                    <div class="col">
+                        <a href="@Url.Action("Empresa", "Empresa")" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-8">
+            <!--<gmp-map center="19.4260032,-99.1862786"
+                 zoom="14"
+                 map-id="map"
+                 style="height: 535px">-->
+            @*<gmp-advanced-marker position="19.416993,-99.186238"
+                                     title="Bosque de Chapultepec Sección I"></gmp-advanced-marker>
+                <gmp-advanced-marker position="19.435712, -99.154202"
+                                     title="Monumento a la Revolución"></gmp-advanced-marker>*@
+            <!--</gmp-map>-->
+
+
+            <div id="map" style="height: 535px"></div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+        key: "AIzaSyDCt5qUAX_luLPwkcfUOJutLLavQwVFgcA",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+    });
+</script>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+
+    let latitudGetById = $('#inptLatitud').val()
+    let longitudGetById = $('#inptLongitud').val()
+    console.log(latitudGetById)
+    console.log(longitudGetById)
+
+    async function initMap() {
+        // Request needed libraries.
+        const { Map } = await google.maps.importLibrary("maps");
+        const mapDiv = document.getElementById("map");
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+        // We add a DOM event here to show an alert if the DIV containing the
+        // map is clicked.
+        //google.maps.event.addDomListener(mapDiv, "click", () => {
+        //    window.alert("Map was clicked!");
+        //});
+
+
+        let marker;
+        let map;
+
+        if (latitudGetById != "" && longitudGetById != "") {
+            map = new google.maps.Map(mapDiv, {
+                zoom: 16,
+                center: { lat: parseFloat(latitudGetById), lng: parseFloat(longitudGetById) },
+                mapId: "DEMO_MAP_ID",
+            });
+
+            marker = new AdvancedMarkerElement({
+                map,
+                position: { lat: parseFloat(latitudGetById), lng: parseFloat(longitudGetById) },
+            });
+
+
+        } else {
+            map = new google.maps.Map(mapDiv, {
+                zoom: 12,
+                center: new google.maps.LatLng(19.42847, -99.12766),
+                mapId: "DEMO_MAP_ID",
+            });
+        }
+
+        google.maps.event.addListener(map, "click", function (event) {
+            const lat = event.latLng.lat();
+            const lng = event.latLng.lng();
+
+            console.log("click en el mapa")
+
+            if (marker) {
+                marker.setMap(null);
+            }
+
+            marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+            });
+
+            //map.setCenter({ lat: lat, lng: lng });
+
+            document.getElementById("inptLatitud").value = lat.toFixed(6);
+            document.getElementById("inptLongitud").value = lng.toFixed(6);
+        });
+    }
+
+    initMap();
+</script>

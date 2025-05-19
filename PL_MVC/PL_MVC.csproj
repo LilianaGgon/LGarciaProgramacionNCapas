@@ -235,6 +235,7 @@
     <Compile Include="Controllers\CandidatoController.cs" />
     <Compile Include="Controllers\CitaController.cs" />
     <Compile Include="Controllers\CrudJSController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -303,6 +304,7 @@
     <Content Include="Scripts\Candidato\Validaciones.js" />
     <Content Include="Scripts\Citas\Botones.js" />
     <Content Include="Scripts\CrudJS\Crud.js" />
+    <Content Include="Scripts\Empresas\GoogleMapsApi.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -359,6 +361,8 @@
     <Content Include="Views\Candidato\FormCandidato.cshtml" />
     <Content Include="Views\Cita\Cita.cshtml" />
     <Content Include="Views\Cita\FormCita.cshtml" />
+    <Content Include="Views\Empresa\Empresa.cshtml" />
+    <Content Include="Views\Empresa\FormEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

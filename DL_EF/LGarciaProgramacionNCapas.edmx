@@ -69,6 +69,15 @@
           <Property Name="IdColonia" Type="int" />
           <Property Name="IdUsuario" Type="int" />
         </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Latitud" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Longitud" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="IdEstado" />
@@ -379,6 +388,7 @@
           <Parameter Name="Sexo" Type="char" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
           <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
           <Parameter Name="Calle" Type="varchar" Mode="In" />
           <Parameter Name="NumeroInterior" Type="varchar" Mode="In" />
@@ -399,6 +409,7 @@
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
           <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
           <Parameter Name="Calle" Type="varchar" Mode="In" />
           <Parameter Name="NumeroInterior" Type="varchar" Mode="In" />
@@ -428,6 +439,7 @@
           <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colonia" EntityType="Self.Colonia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstatusCita" EntityType="Self.EstatusCita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstatusVacante" EntityType="Self.EstatusVacante" Schema="dbo" store:Type="Tables" />
@@ -566,6 +578,7 @@
             <Parameter Name="Sexo" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
             <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
             <Parameter Name="Calle" Mode="In" Type="String" />
             <Parameter Name="NumeroInterior" Mode="In" Type="String" />
@@ -586,6 +599,7 @@
             <Parameter Name="Telefono" Mode="In" Type="String" />
             <Parameter Name="Estatus" Mode="In" Type="Boolean" />
             <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
             <Parameter Name="Calle" Mode="In" Type="String" />
             <Parameter Name="NumeroInterior" Mode="In" Type="String" />
@@ -678,6 +692,7 @@
             <End Role="Piso" EntitySet="Pisoes" />
             <End Role="Cita" EntitySet="Citas" />
           </AssociationSet>
+          <EntitySet Name="Empresas" EntityType="LGarciaProgramacionNCapasModel.Empresa" />
         </EntityContainer>
         <EntityType Name="Rol">
           <Key>
@@ -1233,6 +1248,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitud" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Longitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1648,6 +1672,16 @@
               <MappingFragment StoreEntitySet="Piso">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdPiso" ColumnName="IdPiso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="LGarciaProgramacionNCapasModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -93,6 +93,9 @@
     <Compile Include="DireccionGetByIdUsuario_Result1.cs">
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Empresa.cs">
+      <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Estado.cs">
       <DependentUpon>LGarciaProgramacionNCapas.tt</DependentUpon>
     </Compile>

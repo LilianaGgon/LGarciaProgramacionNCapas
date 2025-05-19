@@ -595,7 +595,7 @@ namespace BL
             {
                 using (DL_EF.LGarciaProgramacionNCapasEntities context = new DL_EF.LGarciaProgramacionNCapasEntities())
                 {
-                    int filasAfectadas = context.UsuarioDireccionAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.CURP.ToUpper(), /*usuario.Imagen /*SOLO PARA EF ,*/ usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
+                    int filasAfectadas = context.UsuarioDireccionAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.CURP.ToUpper(), usuario.Imagen, /*SOLO PARA EF ,*/ usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
                     if (filasAfectadas > 0)
                     {
                         result.Correct = true;
@@ -627,7 +627,7 @@ namespace BL
             {
                 using (DL_EF.LGarciaProgramacionNCapasEntities context = new DL_EF.LGarciaProgramacionNCapasEntities())
                 {
-                    int filasAfectadas = context.UsuarioDireccioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.Estatus, usuario.CURP.ToUpper(), /*usuario.Imagen //SOLO PARA EF, */ usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
+                    int filasAfectadas = context.UsuarioDireccioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.Celular, usuario.UserName, usuario.Email, usuario.Password, Convert.ToDateTime(usuario.FechaNacimiento), usuario.Sexo, usuario.Telefono, usuario.Estatus, usuario.CURP.ToUpper(), usuario.Imagen, /* //SOLO PARA EF, */ usuario.Rol.IdRol, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
                     if (filasAfectadas > 0)
                     {
                         result.Correct = true;
