@@ -63,6 +63,10 @@
             {
                 @Html.HiddenFor(model => model.Candidato.IdCandidato)
                 @Html.HiddenFor(model => model.IdCita, new {@id = "idCitaHiddenFor"})
+                @Html.HiddenFor(model => model.Candidato.Nombre)
+                @Html.HiddenFor(model => model.Candidato.Correo)
+                @Html.HiddenFor(model => model.Candidato.Vacante.Nombre)
+
                 <div class="row">
                     <div class="row">
                             <span>Fecha y hora de la cita</span>

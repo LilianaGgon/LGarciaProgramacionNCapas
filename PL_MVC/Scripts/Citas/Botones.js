@@ -35,7 +35,7 @@ function EstatusCita() {
 
     if (idCitaHiddenFor == 0) {
         $('#ddlEstatusCita').attr("disabled", "disabled")
-        
+
     }
 
 }

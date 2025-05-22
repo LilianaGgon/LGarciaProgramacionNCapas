@@ -43,7 +43,7 @@ namespace ML
 
         [DisplayName("Direccion")]
         [Required(ErrorMessage = "La direccion es obligatorio")]
-        [RegularExpression(@"[aA-zZ0-9.-]{15,500}", ErrorMessage = "Solo se aceptan letras, numeros, -. \n No puede contener más de 500 caracteres")]
+        [RegularExpression(@"[a-z A-Z 0-9 . -]{15,500}", ErrorMessage = "Solo se aceptan letras, numeros, -. \n No puede contener más de 500 caracteres")]
         public string Direccion { get; set; }
 
         [DisplayName("Foto")]
