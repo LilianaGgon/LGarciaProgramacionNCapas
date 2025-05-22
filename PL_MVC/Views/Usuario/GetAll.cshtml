@@ -46,6 +46,7 @@
                             </div>
                             <div class="col align-text-bottom">
                                 <button type="submit" class="btn btn-outline-success">Buscar</button>
+                                <a href="@Url.Action("GetAll", "Usuario")" class="btn btn-outline-danger">Borrar filtros</a>
                             </div>
                         </div>
                     }
@@ -81,30 +82,30 @@
         }
         else
         {
-    <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
-                Carga Masiva
-            </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                @using (Html.BeginForm("CargaMasivaExcel", "Usuario", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-                {
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="alert alert-success" role="alert">
-                                Excel válido
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                        Carga Masiva
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        @using (Html.BeginForm("CargaMasivaExcel", "Usuario", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="alert alert-success" role="alert">
+                                        Excel válido
+                                    </div>
+                                </div>
+                                <div class="col align-text-bottom">
+                                    <button type="submit" class="btn btn-outline-success">Insertar datos</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col align-text-bottom">
-                            <button type="submit" class="btn btn-outline-success">Insertar datos</button>
-                        </div>
+                        }
                     </div>
-                }
+                </div>
             </div>
-        </div>
-    </div>
         }
     </div>
 
@@ -170,7 +171,7 @@
                                         @if (usuario.Imagen != null && usuario.Imagen.Length > 0)
                                         {
                                             <div class="col-6">
-                                                <img src="data:image/*;base64,@Convert.ToBase64String(usuario.Imagen)" width="70" height="70" />
+                                                <img src="data:image/*;base64,@usuario.ImagenBase64" width="70" height="70" />
                                             </div>
                                         }
                                         else

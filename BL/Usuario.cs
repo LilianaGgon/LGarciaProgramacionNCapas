@@ -791,6 +791,7 @@ namespace BL
                         usuario.Estatus = query.Estatus;
                         usuario.CURP = query.CURP.ToUpper();
                         usuario.Imagen = query.Imagen;    //Solo para EF
+                        usuario.ImagenBase64 = usuario.Imagen == null ? "" : Convert.ToBase64String(query.Imagen);
                         if (query.IdRol != null)
                         {
                             usuario.Rol.IdRol = query.IdRol.Value;

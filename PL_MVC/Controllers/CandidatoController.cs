@@ -47,6 +47,7 @@ namespace PL_MVC.Controllers
             }
             else
             {
+                candidato.Candidatos = new List<object>();
                 Candidato();
             }
 

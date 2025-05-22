@@ -154,7 +154,7 @@ namespace DL_EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetAllViewBusquedaAbierta_Result>("UsuarioGetAllViewBusquedaAbierta", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, idRolParameter);
         }
     
-        public virtual int UsuarioDireccionAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, string cURP, byte[] imagen, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
+        public virtual int UsuarioDireccionAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, string cURP, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -200,10 +200,6 @@ namespace DL_EF
                 new ObjectParameter("CURP", cURP) :
                 new ObjectParameter("CURP", typeof(string));
     
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
-    
             var idRolParameter = idRol.HasValue ?
                 new ObjectParameter("IdRol", idRol) :
                 new ObjectParameter("IdRol", typeof(int));
@@ -224,10 +220,10 @@ namespace DL_EF
                 new ObjectParameter("IdColonia", idColonia) :
                 new ObjectParameter("IdColonia", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccionAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, cURPParameter, imagenParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccionAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, cURPParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
         }
     
-        public virtual int UsuarioDireccioUpdate(Nullable<int> idUsuario, string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, Nullable<bool> estatus, string cURP, byte[] imagen, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
+        public virtual int UsuarioDireccioUpdate(Nullable<int> idUsuario, string nombre, string apellidoPaterno, string apellidoMaterno, string celular, string userName, string email, string password, Nullable<System.DateTime> fechaNacimiento, string sexo, string telefono, Nullable<bool> estatus, string cURP, Nullable<int> idRol, string calle, string numeroInterior, string numeroExterior, Nullable<int> idColonia)
         {
             var idUsuarioParameter = idUsuario.HasValue ?
                 new ObjectParameter("IdUsuario", idUsuario) :
@@ -280,11 +276,11 @@ namespace DL_EF
             var cURPParameter = cURP != null ?
                 new ObjectParameter("CURP", cURP) :
                 new ObjectParameter("CURP", typeof(string));
-    
+
             var imagenParameter = imagen != null ?
                 new ObjectParameter("Imagen", imagen) :
                 new ObjectParameter("Imagen", typeof(byte[]));
-    
+
             var idRolParameter = idRol.HasValue ?
                 new ObjectParameter("IdRol", idRol) :
                 new ObjectParameter("IdRol", typeof(int));
@@ -305,7 +301,7 @@ namespace DL_EF
                 new ObjectParameter("IdColonia", idColonia) :
                 new ObjectParameter("IdColonia", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccioUpdate", idUsuarioParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, estatusParameter, cURPParameter, imagenParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDireccioUpdate", idUsuarioParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, celularParameter, userNameParameter, emailParameter, passwordParameter, fechaNacimientoParameter, sexoParameter, telefonoParameter, estatusParameter, cURPParameter, idRolParameter, calleParameter, numeroInteriorParameter, numeroExteriorParameter, idColoniaParameter);
         }
     
         public virtual int CandidatoAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string edad, string correo, string telefono, string direccion, byte[] foto, byte[] curriculum, Nullable<int> idUniversidad, Nullable<int> idCarrera, Nullable<int> idBolsaTrabajo, Nullable<int> idVacante)

@@ -1469,8 +1469,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UsuarioDireccionAdd" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccionAdd" />
-          <FunctionImportMapping FunctionImportName="UsuarioDireccioUpdate" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccioUpdate" />
           <EntitySetMapping Name="BolsaTrabajoes">
             <EntityTypeMapping TypeName="LGarciaProgramacionNCapasModel.BolsaTrabajo">
               <MappingFragment StoreEntitySet="BolsaTrabajo">
@@ -1685,6 +1683,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioDireccionAdd" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccionAdd" />
+          <FunctionImportMapping FunctionImportName="UsuarioDireccioUpdate" FunctionName="LGarciaProgramacionNCapasModel.Store.UsuarioDireccioUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

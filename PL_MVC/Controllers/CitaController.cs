@@ -47,6 +47,7 @@ namespace PL_MVC.Controllers
             }
             else
             {
+                cita.Citas = new List<object>();
                 Cita();
             }
 

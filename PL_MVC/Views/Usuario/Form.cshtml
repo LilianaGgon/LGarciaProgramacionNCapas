@@ -73,12 +73,43 @@
                 <p class="mensajeError"></p>
             </div>
             <div class="col">
-                @Html.Label("Mujer")
-                @Html.RadioButtonFor(model => model.Sexo, "M", false)
-                @Html.Label("Hombre")
-                @Html.RadioButtonFor(model => model.Sexo, "H", false)
-                @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                <div class="row">
+                    @Html.Label("Sexo", new { @class = "form-label" })
+                    @if (Model.Sexo == null)
+                    {
+                        <div class="col">
+                            @Html.Label("Mujer")
+                            @Html.RadioButtonFor(model => model.Sexo, "M", false)
+                            @Html.Label("Hombre")
+                            @Html.RadioButtonFor(model => model.Sexo, "H", false)
+                            @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                        </div>
+                    }
+
+                    @if (Model.Sexo == "M" || Model.Sexo == "m")
+                    {
+                        <div class="col">
+                            @Html.Label("Mujer")
+                            @Html.RadioButtonFor(model => model.Sexo, "M", true)
+                            @Html.Label("Hombre")
+                            @Html.RadioButtonFor(model => model.Sexo, "H", false)
+                            @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                        </div>
+                    }
+
+                    @if (Model.Sexo == "H" || Model.Sexo == "h")
+                    {
+                        <div class="col">
+                            @Html.Label("Mujer")
+                            @Html.RadioButtonFor(model => model.Sexo, "M", false)
+                            @Html.Label("Hombre")
+                            @Html.RadioButtonFor(model => model.Sexo, "H", true)
+                            @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                </div>
             </div>
+
         </div>
 
         <div class="row align-items-center">
@@ -110,18 +141,18 @@
 
         <div class="row align-items-center">
             <div class="mb-3 col">
-                <input class="form-control" type="file" name="inptFileImgUsuario" id="formFile" onchange="ValidarImagen(), RemplazarImagen(this)">
-                @if (Model.Imagen != null)
+                <input class="form-control" type="file" name="inptFileImgUsuario" id="inptFileImgUsuario" onchange="ValidarImagen(), RemplazarImagen(this)">
+                @if (Model.Imagen != null && Model.Imagen.Length > 0)
                 {
                     <div class="col-6">
-                        <img id="imgUsuario" src="data:image/*;base64,@Convert.ToBase64String(@Model.Imagen)" width="200" height="200" />
+                        <img id="imgUsuario" name="imgUsuario" src="data:image/*;base64,@Convert.ToBase64String(@Model.Imagen)" width="200" height="200" />
                     </div>
                 }
                 else
                 {
                     @Html.LabelFor(model => model.Imagen, new { @class = "form-label" })
                     <div class="col-6">
-                        <img id="imgUsuario" src="https://media.istockphoto.com/id/1473534533/es/vector/avatar-de-imagen-de-perfil-predeterminado-icono-de-avatar-de-usuario-icono-de-persona-icono.jpg?s=612x612&w=0&k=20&c=pxEpFr5yhE4zLcev7LFRFS2uHoe29fq_JKQ3RsRAmlU=" width="100" height="100" />
+                        <img id="imgUsuario" name="imgUsuario" src="https://media.istockphoto.com/id/1473534533/es/vector/avatar-de-imagen-de-perfil-predeterminado-icono-de-avatar-de-usuario-icono-de-persona-icono.jpg?s=612x612&w=0&k=20&c=pxEpFr5yhE4zLcev7LFRFS2uHoe29fq_JKQ3RsRAmlU=" width="100" height="100" />
                     </div>
                 }
             </div>
@@ -198,19 +229,19 @@
                     @Html.Label("Colonia", new { @class = "form-label" })
                     @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select inputObligatorio" })
                     @Html.ValidationMessageFor(model => model.Direccion.Colonia, "", new { @class = "text-danger" })
-                <p class="mensajeError"></p>
+                    <p class="mensajeError"></p>
 
                 </div>
             }
 
             @*<div class="col">
-            @Html.Label("Municipio", new { @class = "form-label" })
-            @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(String.Empty), "Selecciona un municipio", new { @onchange = "ColoniaGetByIdMunicipio()", @id = "ddlMunicipio", @class = "form-select" })
-        </div>
-        <div class="col">
-            @Html.Label("Colonia", new { @class = "form-label" })
-            @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(String.Empty), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select" })
-        </div>*@
+                    @Html.Label("Municipio", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(String.Empty), "Selecciona un municipio", new { @onchange = "ColoniaGetByIdMunicipio()", @id = "ddlMunicipio", @class = "form-select" })
+                </div>
+                <div class="col">
+                    @Html.Label("Colonia", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(String.Empty), "Selecciona una colonia", new { @id = "ddlColonia", @class = "form-select" })
+                </div>*@
         </div>
 
         <div class="row align-items-center">
@@ -229,7 +260,7 @@
 
 <script>
     var urlDDLMunicipio = "@Url.Action("MunicipioGetByIdEstado", "Usuario")?idEstado="
-    
+
     var urlDDLColonia = "@Url.Action("ColoniaGetByIdMunicipio", "Usuario")?idMunicipio="
 
 </script>

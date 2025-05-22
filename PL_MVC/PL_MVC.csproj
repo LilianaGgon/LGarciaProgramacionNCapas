@@ -304,6 +304,8 @@
     <Content Include="Scripts\Candidato\Validaciones.js" />
     <Content Include="Scripts\Citas\Botones.js" />
     <Content Include="Scripts\CrudJS\Crud.js" />
+    <Content Include="Scripts\CrudJS\Crud2.js" />
+    <Content Include="Scripts\CrudJS\CrudJsPrueba.js" />
     <Content Include="Scripts\Empresas\GoogleMapsApi.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
