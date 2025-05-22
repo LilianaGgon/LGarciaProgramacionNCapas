@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="58bc0a37e660436988979ca665c1fbb4" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="58bc0a37e660436988979ca665c1fbb4" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Rol" Width="1.5" PointX="0.75" PointY="2.25" />
         <EntityTypeShape EntityType="LGarciaProgramacionNCapasModel.Usuario" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="LGarciaProgramacionNCapasModel.FK__Usuario__IdRol__619B8048" />
